@@ -4,7 +4,7 @@ import Message from './Message/Message.js'
 const MessageItem = (props) => {
 
     let messagesElements = props.messages.map((person) => {
-        return <Message message={person.message} />
+        return <Message key={person.id} message={person.message} />
     })
 
     let sendMessage = () => {

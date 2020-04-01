@@ -1,7 +1,7 @@
 import React from 'react';
 import classes from './Navbar.module.css';
 import { NavLink } from 'react-router-dom';
-import AvatarNav from '../AvatarNav/AvatarNav.js';
+import AvatarNavContainer from '../AvatarNav/AvatarNavContainer.js';
 
 
 const Navbar = (props) => {
@@ -14,7 +14,7 @@ const Navbar = (props) => {
       <div className={classes.item}><NavLink to="/setting" activeClassName={classes.active}>Settings</NavLink></div>
       <br></br>
       <div className={classes.item}><NavLink to="/friends" activeClassName={classes.active}>Friends</NavLink>
-        <AvatarNav />
+        <AvatarNavContainer />
       </div>
     </nav>
   )

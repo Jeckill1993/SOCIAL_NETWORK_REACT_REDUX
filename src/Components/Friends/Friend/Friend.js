@@ -2,7 +2,7 @@ import React from 'react';
 import classes from './Friend.module.css';
 
 
-let Friend = (props) => {
+const Friend = (props) => {
     return (
         <div>
             <img className={classes.img_item} src={props.avatar} alt="avatar_friend"></img>

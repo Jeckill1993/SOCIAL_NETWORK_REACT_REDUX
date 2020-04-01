@@ -1,25 +1,15 @@
 import React from 'react';
 import Dialog from './Dialog/Dialog.js';
-import StoreContext from '../../../StoreContext.js';
 
 
 const DialogsItem = (props) => {
-
-
+    let dialogsElements = props.dialogs.map((person) => {
+        return <Dialog name={person.name} key={person.id} id={person.id} avatar={person.avatar} />
+    });
 
     return (
-        <StoreContext.Consumer>
-            {
-                (store) => {
-                    let state = store.getState();
-                    let dialogsElements = state.dialogs.dialogs.map((person) => {
-                        return <Dialog name={person.name} id={person.id} avatar={person.avatar} />
-                    });
-
-                    return <div>{ dialogsElements }</div>
-                }}
-        </StoreContext.Consumer>
+        <div>{dialogsElements}</div>
     )
-}
+    }
 
-export default DialogsItem;
+    export default DialogsItem;

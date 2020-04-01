@@ -3,21 +3,18 @@ import classes from './Myposts.module.css'
 import Post from './Post/Post.js';
 
 
-
 const MyPosts = (props) => {
 
     let newPostElement = React.createRef();
     let addPost = () => {
-        props.addPost();   
+        props.addPost();
     }
-    
     let onChangePost = () => {
         let text = newPostElement.current.value;
-        props.updateNewPostText(text);
+        props.onChangePost(text);
     }
-
     let postsElements = props.posts.map((post) => {
-        return <Post name={post.name} message={post.message} like={post.likesCount} />
+        return <Post name={post.name} key={post.id} message={post.message} like={post.likesCount} />
     })
 
     return (
@@ -31,8 +28,6 @@ const MyPosts = (props) => {
             {postsElements}
         </div>
     )
-
 }
-
 
 export default MyPosts;
