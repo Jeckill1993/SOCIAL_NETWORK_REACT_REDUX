@@ -21,7 +21,7 @@ const MessageItem = (props) => {
                 {messagesElements}
             </div>
             <div>
-                <textarea onChange={changeTextMessage} placeholder="Enter your message"></textarea>
+                <textarea onChange={changeTextMessage} placeholder="Enter your message" value={props.newMessageText}></textarea>
                 <br></br>
                 <button onClick={sendMessage}>Send</button>
             </div>

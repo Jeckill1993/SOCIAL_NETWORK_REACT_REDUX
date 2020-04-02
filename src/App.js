@@ -8,6 +8,7 @@ import News from './Components/News/News.js';
 import Music from './Components/Music/Music.js';
 import Setting from './Components/Setting/Setting.js';
 import FriendsContainer from './Components/Friends/FriendsContainer';
+import UsersContainer from './Components/Users/UsersContainer.js';
 
 import { BrowserRouter, Route } from 'react-router-dom';
 
@@ -25,6 +26,7 @@ function App(props) {
           <Route path="/news" render={() => <News />} />
           <Route path="/music" render={() => <Music />} />
           <Route path="/setting" render={() => <Setting />} />
+          <Route path="/users" render={() => <UsersContainer />} />
           <Route path="/friends" render={() => <FriendsContainer />} />
         </div>
       </div>
