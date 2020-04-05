@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import Header from './Components/Header/Header.js';
 import Navbar from './Components/Navbar/Navbar.js';
-import Profile from './Components/Profile/Profile.js';
+import ProfileContainer from './Components/Profile/ProfileContainer.js';
 import Dialogs from './Components/Dialogs/Dialogs.js';
 import News from './Components/News/News.js';
 import Music from './Components/Music/Music.js';
@@ -21,7 +21,7 @@ function App(props) {
         <Header />
         <Navbar />
         <div className="container">
-          <Route path="/profile" render={() => <Profile />} />
+          <Route path="/profile/:userId?" render={() => <ProfileContainer />} />
           <Route path="/dialogs" render={() => <Dialogs />} />
           <Route path="/news" render={() => <News />} />
           <Route path="/music" render={() => <Music />} />

@@ -15,7 +15,7 @@ ReactDOM.render(<BrowserRouter>
     </Provider>
 </BrowserRouter>, document.getElementById('root'));
 
-
+window.store = store;
 
 
 

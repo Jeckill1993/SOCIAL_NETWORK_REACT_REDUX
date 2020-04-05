@@ -7,3 +7,16 @@
   #avatar {
     width: 25%;
   }
+
+  .profileItem {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 100px;
+    background-color: rgb(114, 156, 142);
+  }
+  .profileItem img {
+    width: 180px;
+    border-radius: 50%;
+  }
