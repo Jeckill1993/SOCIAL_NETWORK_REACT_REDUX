@@ -1,3 +1,5 @@
+import { usersAPI } from '../API/api.js';
+
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET-USERS';
@@ -6,6 +8,8 @@ const SET_TOTAL_USER_COUNT = 'SET_TOTAL_USER_COUNT';
 const TOGGLE_IS_FETCHING = 'TOGGLE-IS-FETCHING';
 const TOGGLE_IS_FOLLOWING_PROGRESS = 'TOGGLE-IS-FOLLOWING-PROGRESS';
 
+
+//actionCreator-ы, в которые мы передаем название action, диспатчим именно их
 export const followUser = (userId) => ({
     type: FOLLOW,
     userId,
@@ -35,6 +39,44 @@ export const toogleFollowingProgress = (isFetching, userId) => ({
     isFetching,
     userId,
 });
+
+
+//thunkCreator, в котором используется замыкание, чтоб функция thunk могла получить данные
+export const getUsersThunkCreator = (currentPage, pageSize) => {
+    return (dispatch) => {
+        dispatch(toogleIsFetchung(true));
+        usersAPI.getUsers(currentPage, pageSize).then(data => {
+            dispatch(toogleIsFetchung(false));
+            dispatch(setUsers(data.items));
+            dispatch(setTotalUserCount(data.totalCount));
+        });
+    }
+}
+export const followUserThunkCreator = (userId) => {
+    return (dispatch) => {
+        dispatch(toogleFollowingProgress(true, userId));
+        usersAPI.makeFollow(userId)
+            .then(data => {
+                if (data.resultCode === 0) {
+                    dispatch(followUser(userId));
+                }
+                dispatch(toogleFollowingProgress(false, userId));
+            });
+    }
+}
+export const unfollowUserThunkCreator = (userId) => {
+    return (dispatch) => {
+        dispatch(toogleFollowingProgress(true, userId));
+        usersAPI.deleteFollow(userId)
+            .then(data => {
+                if (data.resultCode === 0) {
+                    dispatch(unfollowUser(userId));
+                }
+                dispatch(toogleFollowingProgress(false, userId));
+            });
+    }
+}
+
 
 let initialState = {
     users: [],
@@ -90,14 +132,16 @@ const UsersReducer = (state = initialState, action) => {
         case TOGGLE_IS_FOLLOWING_PROGRESS:
             return {
                 ...state,
-                followingInProgress: action.isFetching 
-                ? [...state.followingInProgress, action.userId] 
-                : [...state.followingInProgress.filter(id => id != action.userId) ]
+                followingInProgress: action.isFetching
+                    ? [...state.followingInProgress, action.userId]
+                    : [...state.followingInProgress.filter(id => id != action.userId)]
             }
         default:
             return state;
     }
 }
+
+
 
 
 export default UsersReducer;

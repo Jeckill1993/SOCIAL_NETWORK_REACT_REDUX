@@ -1,11 +1,9 @@
 import React from 'react';
-import classes from './Profile.module.css';
-import * as Axios from 'axios';
 import Profile from './Profile.js';
 import { connect } from 'react-redux';
-import { setUserProfile } from './../../redux/profile_reducer.js';
-import { withRouter } from 'react-router-dom';
-import { usersAPI } from './../../API/api.js';
+import { withRouter, Redirect } from 'react-router-dom';
+import { getProfileThunkCreator } from './../../redux/profile_reducer.js';
+import { withAuthRedirect } from './../../hoc/withAuthRedirect.js';
 
 
 class ProfileContainer extends React.Component {
@@ -15,23 +13,32 @@ class ProfileContainer extends React.Component {
         if (!userId) {
             userId = 2;
         }
-        usersAPI.getProfile(userId).then(data => {
-            this.props.setUserProfile(data);
-        });
+        this.props.getProfile(userId);
     }
 
-
     render() {
+
+        if (!this.props.isAuth) {
+            return <Redirect to={"/login"} />
+        }
+
         return (
             <Profile {...this.props} profile={this.props.profile} />
         )
     }
 }
 
+let AuthRedirectComponent = withAuthRedirect(ProfileContainer);
+
+
 let mapStateToProps = (state) => ({
     profile: state.profilePage.profile,
 })
 
-let withURLDataContainerComponent = withRouter(ProfileContainer);
+let withURLDataContainerComponent = withRouter(AuthRedirectComponent);
 
-export default connect(mapStateToProps, { setUserProfile })(withURLDataContainerComponent);
+export default connect(mapStateToProps,
+    {
+        getProfile: getProfileThunkCreator,
+    })
+    (withURLDataContainerComponent);
