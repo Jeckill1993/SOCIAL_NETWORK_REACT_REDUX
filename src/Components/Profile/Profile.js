@@ -2,6 +2,7 @@ import React from 'react';
 import classes from './Profile.module.css';
 import MyPostsContainer from './Myposts/MyPostsContainer.js'
 import Preloader from '../common/Preloader/Preloader';
+import ProfileStatus from './ProfileStatus.js'
 
 
 
@@ -26,6 +27,7 @@ const Profile = (props) => {
       <img className={classes.main_photo} src="https://images.pexels.com/photos/807598/pexels-photo-807598.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="main-photo"></img>
       <div>
         <img id={classes.avatar} src="https://ah.net.ua/wa-data/public/shop/products/84/54/5484/images/8405/8405.970.png" alt="avatar"></img>
+        <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
         <div>
 
           <div className={classes.profileItem}>
