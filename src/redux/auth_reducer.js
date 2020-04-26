@@ -10,34 +10,31 @@ export const setAuthUserData = (userId, login, email, isAuth) => ({
 });
 
 export const getAuthDataThunkCreator = () => {
-    return (dispatch) => {
-        return authAPI.me().then(data => {
-            if (data.resultCode === 0) {
-                let { id, login, email } = data.data;
-                dispatch(setAuthUserData(id, login, email, true));
-            }
-        });
+    return async (dispatch) => {
+        let data = await authAPI.me();
+        if (data.resultCode === 0) {
+            let { id, login, email } = data.data;
+            dispatch(setAuthUserData(id, login, email, true));
+        }
     }
 }
 export const setMyLoginDataThunkCreator = (data) => {
-    return (dispatch) => {
-        authAPI.login(data).then(response => {
-            if (response.data.resultCode === 0) {
-                dispatch(getAuthDataThunkCreator());
-            } else {
-                let messageError = response.data.messages.length > 0 ? response.data.messages[0] : 'some error';
-                dispatch(stopSubmit("login", { _error: messageError }));
-            }
-        })
+    return async (dispatch) => {
+        let response = await authAPI.login(data);
+        if (response.data.resultCode === 0) {
+            dispatch(getAuthDataThunkCreator());
+        } else {
+            let messageError = response.data.messages.length > 0 ? response.data.messages[0] : 'some error';
+            dispatch(stopSubmit("login", { _error: messageError }));
+        }
     }
 }
 export const logOutThunkCreator = () => {
-    return (dispatch) => {
-        authAPI.logOut().then(data => {
+    return async (dispatch) => {
+        let data = await authAPI.logOut();
             if (data.resultCode === 0) {
                 dispatch(setAuthUserData(null, null, null, false));
             }
-        })
     }
 }
 

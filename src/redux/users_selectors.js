@@ -1,10 +1,8 @@
 //reselect is used only for difficult selectors
 
-//import { createSelector } from "reselect";
+import { createSelector } from "reselect";
 
-export const getUsers = (state) => {
-    return state.usersPage.users;
-}
+
 export const getPageSize = (state) => {
     return state.usersPage.pageSize;
 }
@@ -22,10 +20,9 @@ export const getFollowingInProgress = (state) => {
 }
 
 
-/*export const getUsersSelector = (state) => {
-    return getUsers(state).filter(user => true);
+export const getUsers = (state) => {
+    return state.usersPage.users;
 }
-
-export const getUsersSuperSelector = createSelector(getUsers, (users) => {
-    users.filter(user => true);
-});*/
+export const getUsersSelector = createSelector(getUsers, (users) => {
+    return users.filter(user => true);
+});

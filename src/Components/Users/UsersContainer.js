@@ -9,7 +9,7 @@ import Users from './Users.js';
 import Preloader from './../common/Preloader/Preloader.js';
 import { withAuthRedirect } from './../../hoc/withAuthRedirect.js'
 import { compose } from 'redux';
-import { getUsers } from './../../redux/users_selectors.js';
+import { getUsersSelector } from './../../redux/users_selectors.js';
 import { getPageSize } from './../../redux/users_selectors.js';
 import { getTotalUsersCount } from './../../redux/users_selectors.js';
 import { getCurrentPage } from './../../redux/users_selectors.js';
@@ -38,7 +38,8 @@ class UsersContainer extends React.Component {
                 unfollow={this.props.unfollow}
                 isFetching={this.props.isFetching}
                 followingInProgress={this.props.followingInProgress}
-                toogleFollowingProgress={this.props.toogleFollowingProgress} />
+                toogleFollowingProgress={this.props.toogleFollowingProgress} 
+                portionSize={this.props.portionSize} />
         </>
     }
 }
@@ -46,26 +47,15 @@ class UsersContainer extends React.Component {
 
 let mapStateToProps = (state) => {
     return {
-        users: getUsers(state),
+        users: getUsersSelector(state),
         pageSize: getPageSize(state),
         totalUsersCount: getTotalUsersCount(state),
         currentPage: getCurrentPage(state),
         isFetching: getIsFetching(state),
         followingInProgress: getFollowingInProgress(state),
+        portionSize: state.usersPage.portionSize,
     }
 }
-
-
-/*let mapStateToProps = (state) => {
-    return {
-        users: state.usersPage.users,
-        pageSize: state.usersPage.pageSize,
-        totalUsersCount: state.usersPage.totalUsersCount,
-        currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching,
-        followingInProgress: state.usersPage.followingInProgress,
-    }
-}*/
 
 export default compose(
     connect(mapStateToProps, { setCurrentPage, toogleFollowingProgress, getUsers: getUsersThunkCreator, follow: followUserThunkCreator, unfollow: unfollowUserThunkCreator }),

@@ -1,4 +1,5 @@
 import { usersAPI } from '../API/api.js';
+import { updateObjectInArray } from './../tools/object-helpers.js';
 
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
@@ -41,39 +42,39 @@ export const toogleFollowingProgress = (isFetching, userId) => ({
 });
 
 
+const followUnfollowFlow = async (dispatch, userId, apiMethod, actionCreator) => {
+    dispatch(toogleFollowingProgress(true, userId));
+
+    let data = await apiMethod(userId);
+    if (data.resultCode === 0) {
+        dispatch(actionCreator(userId));
+    }
+    dispatch(toogleFollowingProgress(false, userId));
+}
+
+
 //thunkCreator, в котором используется замыкание, чтоб функция thunk могла получить данные
 export const getUsersThunkCreator = (currentPage, pageSize) => {
-    return (dispatch) => {
+    return async (dispatch) => {
         dispatch(toogleIsFetchung(true));
-        usersAPI.getUsers(currentPage, pageSize).then(data => {
-            dispatch(toogleIsFetchung(false));
-            dispatch(setUsers(data.items));
-            dispatch(setTotalUserCount(data.totalCount));
-        });
+        let data = await usersAPI.getUsers(currentPage, pageSize);
+        dispatch(toogleIsFetchung(false));
+        dispatch(setUsers(data.items));
+        dispatch(setTotalUserCount(data.totalCount));
     }
 }
 export const followUserThunkCreator = (userId) => {
-    return (dispatch) => {
-        dispatch(toogleFollowingProgress(true, userId));
-        usersAPI.makeFollow(userId)
-            .then(data => {
-                if (data.resultCode === 0) {
-                    dispatch(followUser(userId));
-                }
-                dispatch(toogleFollowingProgress(false, userId));
-            });
+    return async (dispatch) => {
+        let apiMethod = usersAPI.makeFollow.bind(userId);
+        let actionCreator = followUser;
+        followUnfollowFlow(dispatch, userId, apiMethod, actionCreator);
     }
 }
 export const unfollowUserThunkCreator = (userId) => {
-    return (dispatch) => {
-        dispatch(toogleFollowingProgress(true, userId));
-        usersAPI.deleteFollow(userId)
-            .then(data => {
-                if (data.resultCode === 0) {
-                    dispatch(unfollowUser(userId));
-                }
-                dispatch(toogleFollowingProgress(false, userId));
-            });
+    return async (dispatch) => {
+        let apiMethod = usersAPI.deleteFollow.bind(userId);
+        let actionCreator = unfollowUser;
+        followUnfollowFlow(dispatch, userId, apiMethod, actionCreator);
     }
 }
 
@@ -81,6 +82,7 @@ export const unfollowUserThunkCreator = (userId) => {
 let initialState = {
     users: [],
     pageSize: 20,
+    portionSize: 10,
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: true,
@@ -92,22 +94,12 @@ const UsersReducer = (state = initialState, action) => {
         case FOLLOW:
             return {
                 ...state,
-                users: state.users.map((user) => {
-                    if (user.id === action.userId) {
-                        return { ...user, followed: true }
-                    }
-                    return user;
-                }),
+                users: updateObjectInArray(state.users, action.userId, 'id', {followed: true}),
             }
         case UNFOLLOW:
             return {
                 ...state,
-                users: state.users.map((user) => {
-                    if (user.id === action.userId) {
-                        return { ...user, followed: false }
-                    }
-                    return user;
-                }),
+                users: updateObjectInArray(state.users, action.userId, 'id', {followed: false}),
             }
         case SET_USERS:
             return {

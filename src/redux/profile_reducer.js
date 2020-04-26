@@ -1,8 +1,9 @@
 import { profileAPI } from '../API/api.js';
 
-const ADD_POST = 'ADD-POST';
-const SET_USER_PROFILE = 'SET-USER-PROFILE';
-const SET_STATUS = 'SET-STATUS';
+const ADD_POST = 'social-network/profile/ADD-POST';
+const SET_USER_PROFILE = 'social-network/profile/SET-USER-PROFILE';
+const SET_STATUS = 'social-network/profile/SET-STATUS';
+//const DELETE_POST = 'social-network/profile/DELETE-POST';
 
 
 export const addPostActionCreator = (postText) => {
@@ -11,6 +12,12 @@ export const addPostActionCreator = (postText) => {
         postText,
     }
 }
+/*export const deletePost = (postId) => {
+    return {
+        type: DELETE_POST,
+        postId,
+    }
+}*/
 export const setUserProfile = (profile) => ({
     type: SET_USER_PROFILE,
     profile: profile,
@@ -21,26 +28,23 @@ export const setStatus = (status) => ({
 })
 
 export const getProfileThunkCreator = (userId) => {
-    return (dispatch) => {
-        profileAPI.getProfile(userId).then(data => {
-            dispatch(setUserProfile(data));
-        });
+    return async (dispatch) => {
+        let data = await profileAPI.getProfile(userId);
+        dispatch(setUserProfile(data));
     }
 }
 export const getStatus = (userId) => {
-    return (dispatch) => {
-        profileAPI.getStatus(userId).then(response => {
-            dispatch(setStatus(response.data));
-        })
+    return async (dispatch) => {
+        let response = await profileAPI.getStatus(userId);
+        dispatch(setStatus(response.data));
     }
 }
 export const updateStatus = (status) => {
-    return (dispatch) => {
-        profileAPI.updateStatus(status).then(response => {
-            if (response.data.resultCode === 0) {
-                dispatch(setStatus(response.data));
-            }
-        })
+    return async (dispatch) => {
+        let response = await profileAPI.updateStatus(status);
+        if (response.data.resultCode === 0) {
+            dispatch(getStatus(response.data));
+        }
     }
 }
 
@@ -65,17 +69,23 @@ const profileReducer = (state = initialState, action) => {
             return {
                 ...state,
                 posts: [...state.posts, (newPost)],
-            }
+            };
         case SET_USER_PROFILE:
             return {
                 ...state,
                 profile: action.profile,
-            }
+            };
         case SET_STATUS:
             return {
                 ...state,
                 status: action.status,
-            }
+            };
+        /*case DELETE_POST: {
+            return {
+                ...state,
+                posts: state.posts.filter((post) => { post.id != action.postId }),
+            };
+        }*/
         default:
             return state;
     }
