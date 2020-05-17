@@ -1,14 +1,15 @@
-import { authAPI } from './../API/api.js';
 import { getAuthDataThunkCreator } from './auth_reducer.js';
 
-const SET_INITIALIZED = 'SET-INITIALIZED';
+const SET_INITIALIZED = 'social-network/app/SET-INITIALIZED';
 
+//action creator
 export const setInitialized = () => {
     return {
         type: SET_INITIALIZED,
     }
 } 
 
+//thunk creator, side effect
 export const initialize = () => {
     return (dispatch) => {
         let promise = dispatch(getAuthDataThunkCreator());

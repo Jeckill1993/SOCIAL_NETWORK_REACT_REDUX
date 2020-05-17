@@ -1,16 +1,16 @@
 import { usersAPI } from '../API/api.js';
 import { updateObjectInArray } from './../tools/object-helpers.js';
 
-const FOLLOW = 'FOLLOW';
-const UNFOLLOW = 'UNFOLLOW';
-const SET_USERS = 'SET-USERS';
-const SET_CURRENT_PAGE = 'SET-CURRENT-PAGE';
-const SET_TOTAL_USER_COUNT = 'SET_TOTAL_USER_COUNT';
-const TOGGLE_IS_FETCHING = 'TOGGLE-IS-FETCHING';
-const TOGGLE_IS_FOLLOWING_PROGRESS = 'TOGGLE-IS-FOLLOWING-PROGRESS';
+const FOLLOW = 'social-network/users/FOLLOW';
+const UNFOLLOW = 'social-network/users/UNFOLLOW';
+const SET_USERS = 'social-network/users/SET-USERS';
+const SET_CURRENT_PAGE = 'social-network/users/SET-CURRENT-PAGE';
+const SET_TOTAL_USER_COUNT = 'social-network/users/SET_TOTAL_USER_COUNT';
+const TOGGLE_IS_FETCHING = 'social-network/users/TOGGLE-IS-FETCHING';
+const TOGGLE_IS_FOLLOWING_PROGRESS = 'social-network/users/TOGGLE-IS-FOLLOWING-PROGRESS';
 
 
-//actionCreator-ы, в которые мы передаем название action, диспатчим именно их
+//action creator, return action
 export const followUser = (userId) => ({
     type: FOLLOW,
     userId,
@@ -41,19 +41,7 @@ export const toogleFollowingProgress = (isFetching, userId) => ({
     userId,
 });
 
-
-const followUnfollowFlow = async (dispatch, userId, apiMethod, actionCreator) => {
-    dispatch(toogleFollowingProgress(true, userId));
-
-    let data = await apiMethod(userId);
-    if (data.resultCode === 0) {
-        dispatch(actionCreator(userId));
-    }
-    dispatch(toogleFollowingProgress(false, userId));
-}
-
-
-//thunkCreator, в котором используется замыкание, чтоб функция thunk могла получить данные
+//thunk creator, side effect
 export const getUsersThunkCreator = (currentPage, pageSize) => {
     return async (dispatch) => {
         dispatch(toogleIsFetchung(true));
@@ -76,6 +64,16 @@ export const unfollowUserThunkCreator = (userId) => {
         let actionCreator = unfollowUser;
         followUnfollowFlow(dispatch, userId, apiMethod, actionCreator);
     }
+}
+
+//function
+const followUnfollowFlow = async (dispatch, userId, apiMethod, actionCreator) => {
+    dispatch(toogleFollowingProgress(true, userId));
+    let data = await apiMethod(userId);
+    if (data.resultCode === 0) {
+        dispatch(actionCreator(userId));
+    }
+    dispatch(toogleFollowingProgress(false, userId));
 }
 
 
@@ -126,14 +124,12 @@ const UsersReducer = (state = initialState, action) => {
                 ...state,
                 followingInProgress: action.isFetching
                     ? [...state.followingInProgress, action.userId]
-                    : [...state.followingInProgress.filter(id => id != action.userId)]
+                    : [...state.followingInProgress.filter(id => id !== action.userId)]
             }
         default:
             return state;
     }
 }
-
-
 
 
 export default UsersReducer;

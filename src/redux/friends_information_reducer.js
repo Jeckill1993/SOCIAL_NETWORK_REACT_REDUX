@@ -17,7 +17,6 @@ let initialState = {
 }
 
 const friendInformationReducer = (state = initialState, action) => {
-    
     return state;
 }
 

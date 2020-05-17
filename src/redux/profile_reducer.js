@@ -1,11 +1,13 @@
-import { profileAPI } from '../API/api.js';
+import {profileAPI} from '../API/api.js';
 
 const ADD_POST = 'social-network/profile/ADD-POST';
 const SET_USER_PROFILE = 'social-network/profile/SET-USER-PROFILE';
 const SET_STATUS = 'social-network/profile/SET-STATUS';
 //const DELETE_POST = 'social-network/profile/DELETE-POST';
+const SAVE_PHOTO = 'SAVE-PHOTO';
 
 
+//action creators (return actions)
 export const addPostActionCreator = (postText) => {
     return {
         type: ADD_POST,
@@ -26,7 +28,14 @@ export const setStatus = (status) => ({
     type: SET_STATUS,
     status: status,
 })
+export const savePhoto = (photo) => {
+    return {
+        type: SAVE_PHOTO,
+        photo,
+    }
+}
 
+//thunk creators (return thunks)
 export const getProfileThunkCreator = (userId) => {
     return async (dispatch) => {
         let data = await profileAPI.getProfile(userId);
@@ -47,18 +56,35 @@ export const updateStatus = (status) => {
         }
     }
 }
+export const savePhotoSuccess = (file) => {
+    return async (dispatch) => {
+        let response = await profileAPI.savePhoto(file);
+        if (response.data.resultCode === 0) {
+            dispatch(savePhoto(response.data.data.photos));
+        }
+    }
+}
+export const setMyPersonalInfo = (data) => {
+    //const userId = getState().auth.userId;
+    return async (dispatch) => {
+        let response = await profileAPI.setInfo(data);
+        if (response.data.resultCode === 0) {
+            getProfileThunkCreator(response.data.data.id);
+        }
+    }
+}
+
 
 let initialState = {
     posts: [
-        { id: 1, name: 'Dima', message: 'Oh I hate this girls!', likesCount: 12 },
-        { id: 2, name: 'Jeka', message: 'I like swimming', likesCount: 12 },
-        { id: 3, name: 'Vova', message: 'I need new phone', likesCount: 12 },
-        { id: 4, name: 'Oleg', message: 'I am tester', likesCount: 12 },
+        {id: 1, name: 'Dima', message: 'Oh I hate this girls!', likesCount: 12},
+        {id: 2, name: 'Jeka', message: 'I like swimming', likesCount: 12},
+        {id: 3, name: 'Vova', message: 'I need new phone', likesCount: 12},
+        {id: 4, name: 'Oleg', message: 'I am tester', likesCount: 12},
     ],
     profile: null,
     status: null,
 }
-
 
 const profileReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -86,10 +112,14 @@ const profileReducer = (state = initialState, action) => {
                 posts: state.posts.filter((post) => { post.id != action.postId }),
             };
         }*/
+        case SAVE_PHOTO:
+            return {
+                ...state,
+                profile: {...state.profile, photos: action.photo}
+            }
         default:
             return state;
     }
-
 }
 
 export default profileReducer;

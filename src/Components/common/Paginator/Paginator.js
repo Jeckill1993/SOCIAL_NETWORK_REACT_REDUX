@@ -21,7 +21,7 @@ const Paginator = ({ totalUsersCount, pageSize, onPageChanged, currentPage, port
     return (
         <div>
             <div>
-                <button disabled={portionNumber === 1 ? true : false} onClick={() => { setPortionNumber(portionNumber - 1) }}>
+                <button disabled={portionNumber === 1} onClick={() => { setPortionNumber(portionNumber - 1) }}>
                     Prev
             </button>
                 <div>
@@ -29,12 +29,12 @@ const Paginator = ({ totalUsersCount, pageSize, onPageChanged, currentPage, port
                         return <span onClick={() => { onPageChanged(page) }} className={currentPage === page && classes.selected} key={page}>{page}</span>
                     })}
                 </div>
-                <button disabled={portionNumber === portionCount ? true : false} onClick={() => setPortionNumber(portionNumber + 1)}>
+                <button disabled={portionNumber === portionCount} onClick={() => setPortionNumber(portionNumber + 1)}>
                     Next
             </button>
             </div>
             <div>
-                <input type="text" placeholder='page...' onChange={search} value={searchPageNumber}></input>
+                <input type="text" placeholder='page...' onChange={search} value={searchPageNumber}/>
                 <button onClick={() => { onPageChanged(searchPageNumber) }}>Search</button>
             </div>
         </div>

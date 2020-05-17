@@ -1,11 +1,9 @@
 import React from 'react';
-import classes from './Setting.module.css';
 
-const Setting = () =>{
+
+const Setting = (props) => {
     return (
-        <div>
-            Setting
-        </div>
+        <div>Setting</div>
     )
 }
 

@@ -21,7 +21,7 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: rgb(178, 202, 186);
 }
 
 .App-link {
@@ -42,7 +42,7 @@
   "header header"
   "nav container";
   display: grid;
-  grid-template-rows: 60px 1fr;
+  grid-template-rows: 100px 1fr;
   grid-template-columns: 2fr 10fr;
   grid-gap: 5px;
   width: 80%;
@@ -51,5 +51,11 @@
 
 .container {
   grid-area: container;
-  background-color: rgb(191, 202, 223);
+  background-color: rgb(207, 231, 216);
+}
+
+
+
+.test {
+  color: rgb(167, 167, 221);
 }

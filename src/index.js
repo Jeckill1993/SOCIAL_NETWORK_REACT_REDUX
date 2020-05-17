@@ -4,19 +4,17 @@ import store from './redux/redux_store.js'
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import { BrowserRouter } from 'react-router-dom';
-import { Provider } from 'react-redux';
-
+import {BrowserRouter} from 'react-router-dom';
+import {Provider} from 'react-redux';
 
 
 ReactDOM.render(<BrowserRouter>
     <Provider store={store}>
-        <App />
+        <App/>
     </Provider>
 </BrowserRouter>, document.getElementById('root'));
 
 window.store = store;
-
 
 
 // If you want your app to work offline and load faster, you can change
