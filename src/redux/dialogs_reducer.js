@@ -1,37 +1,112 @@
-const ADD_MESSAGE = 'social-network/dialogs/ADD-MESSAGE';
+import {dialogsAPI} from "../API/api";
 
-export const createNewMessageActionCreator = (message) => {
+const GET_DIALOGS = 'social-network/dialogs/GET-DIALOGS';
+const SET_DIALOG = 'social-network/dialogs/SET-DIALOG';
+const GET_MESSAGES = 'social-network/dialogs/GET-MESSAGES';
+const GET_NEW_MESSAGES = 'social-network/dialogs/GET-NEW-MESSAGES';
+
+
+//action creator
+export const getDialogsActionCreator = (dialogs) => {
     return {
-        type: ADD_MESSAGE,
-        message,
+        type: GET_DIALOGS,
+        dialogs,
+    }
+}
+export const setDialog = (dialog) => {
+    return {
+        type: SET_DIALOG,
+        dialog,
+    }
+}
+export const getMessagesActionCreator = (messages) => {
+    return {
+        type: GET_MESSAGES,
+        messages,
+    }
+}
+export const getNewMessagesActionCreator = (newMessagesCount) => {
+    return {
+        type: GET_NEW_MESSAGES,
+        newMessagesCount,
     }
 }
 
 
+//thunk creator
+export const getDialogs = () => {
+    return async (dispatch) => {
+        let response = await dialogsAPI.getDialogs();
+            dispatch(getDialogsActionCreator(response));
+    }
+}
+export const startDialog = (userId) => {
+    return async (dispatch) => {
+        let response = await dialogsAPI.startDialog(userId);
+        if(response.resultCode === 0) {
+            dispatch(setDialog(response.data));
+        }
+    }
+}
+export const setMessagesView = (messageId) => {
+    return async (dispatch) => {
+        let response = await dialogsAPI.getMessageView(messageId);
+    }
+}
+export const getMessages = (userId) => {
+    return async (dispatch) => {
+        let response = await dialogsAPI.getFriendMessages(userId);
+        dispatch(getMessagesActionCreator(response.items));
+    }
+}
+export const sendMessage = ({userId, body}) => {
+    return async (dispatch) => {
+        let response = await dialogsAPI.sendMessage({userId, body});
+        dispatch(getMessages(userId));
+    }
+}
+export const getNewMessages = () => {
+    return async (dispatch) => {
+        let response = await dialogsAPI.getNewMessages();
+        dispatch(getNewMessagesActionCreator(response));
+    }
+}
+
+
+
 let initialState = {
-    dialogs: [
-        { id: 6, name: 'Jeka', avatar: "https://cs11.pikabu.ru/post_img/2018/10/16/10/1539710350186150878.png" },
-        { id: 7, name: 'Dima', avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSje9XgleNWVOQiO4fHP5FQ9yHorwOIS29_24ex2zzjki0M7h88" },
-        { id: 8, name: 'Dimoon', avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcT9cooUwgzClXEkKQxifvH7hJZLr_pTf8Ha7vtsvsY9yH_NOzwh" },
-    ],
-    messages: [
-        { id: 9, message: "Hey!" },
-        { id: 10, message: "How are you?" },
-        { id: 11, message: "Where are you now?" },
-    ],
+    dialogs: [],
+    messages:[],
+    newMessagesCount: null,
+    currentDialog: {}
 }
 
 const dialogsReducer = (state = initialState, action) => {
 
     switch (action.type) {
-        case ADD_MESSAGE:
-            let newMessage = {
-                id: 4, message: action.message,
-            }
+        case GET_DIALOGS:
             return {
                 ...state,
-                messages: [...state.messages, (newMessage)]
+                dialogs: action.dialogs,
             }
+        case SET_DIALOG: {
+            return {
+                ...state,
+                currentDialog: action.dialog,
+            }
+        }
+        case GET_MESSAGES: {
+            return {
+                ...state,
+                messages: action.messages,
+            }
+        }
+        case GET_NEW_MESSAGES: {
+            return {
+                ...state,
+                newMessagesCount: action.newMessagesCount,
+            }
+        }
         default:
             return state;
     }

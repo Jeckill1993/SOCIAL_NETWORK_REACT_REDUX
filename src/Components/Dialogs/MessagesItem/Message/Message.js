@@ -1,11 +1,10 @@
 import React from 'react';
-import classes from './Message.module.css';
+import classes from './../MessageItem.module.css';
 
 const Message = (props) => {
     return (
-        <div>
+        <div className={classes.messageWrapper}>
             <span>{props.message}</span>
-            <br></br>
         </div>
     )
 }

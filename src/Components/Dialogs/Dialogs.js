@@ -1,26 +1,56 @@
 import React from 'react';
 import classes from './Dialogs.module.css';
-import DialogsItemContainer from './DialogsItem/DialogsItemContainer.js';
-import MessageItemContainer from './MessagesItem/MessageItemContainer.js'
-import { connect } from 'react-redux';
-import { withAuthRedirect } from './../../hoc/withAuthRedirect.js';
-import { compose } from 'redux';
+import DialogsItem from './DialogsItem/DialogsItem.js';
+import MessageItem from './MessagesItem/MessageItem.js'
+import {connect} from 'react-redux';
+import {withAuthRedirect} from '../../hoc/withAuthRedirect.js';
+import {compose} from 'redux';
+import {
+    getDialogs,
+    getMessages,
+    sendMessage, setMessagesView,
+    startDialog
+} from "../../redux/dialogs_reducer";
+import {withRouter} from "react-router-dom";
 
 
 class Dialogs extends React.Component {
-    
+
+    componentDidMount() {
+        let friendId = this.props.match.params.userId;
+        this.props.startDialog(+friendId);
+        this.props.getDialogs();
+    }
+
 
     render() {
         return (
             <div className={classes.dialogs}>
-                <DialogsItemContainer />
-                <MessageItemContainer />
-            </div >
+                <DialogsItem dialogs={this.props.dialogs} getMessages={this.props.getMessages} />
+                <MessageItem messages={this.props.messages} sendMessage={this.props.sendMessage} currentId={this.props.match.params.userId} />
+            </div>
         )
     }
 }
 
+let mapStateToProps = (state) => {
+    return {
+        dialogs: state.dialogs.dialogs,
+        messages: state.dialogs.messages,
+    }
+}
+let mapDispatchToProps = (dispatch) => {
+    return {
+        getDialogs: () => {dispatch(getDialogs())},
+        startDialog: (userId) => {dispatch(startDialog(userId))},
+        getMessages: (userId) => {dispatch(getMessages(userId))},
+        sendMessage: ({userId, body}) => {dispatch(sendMessage({userId, body}))},
+        setMessagesView: (messageId) => {dispatch(setMessagesView(messageId))},
+    }
+}
+
 export default compose(
-    connect(),
+    connect(mapStateToProps, mapDispatchToProps),
+    withRouter,
     withAuthRedirect,
 )(Dialogs);

@@ -1,13 +1,13 @@
 import React, {Suspense, Component} from 'react';
 import './App.css';
 import {connect} from 'react-redux';
-import {BrowserRouter, HashRouter, Redirect, Route, Switch, withRouter} from 'react-router-dom';
+import {BrowserRouter, Redirect, Route, Switch, withRouter} from 'react-router-dom';
 import {compose} from 'redux';
 import {initialize} from './redux/app_reducer.js';
-
 import Preloader from './Components/common/Preloader/Preloader.js';
 import HeaderContainer from './Components/Header/HeaderContainer.js';
 import Navbar from './Components/Navbar/Navbar.js';
+import {getNewMessages} from "./redux/dialogs_reducer";
 
 const ProfileContainer = React.lazy(() => import('./Components/Profile/ProfileContainer.js'));
 const Dialogs = React.lazy(() => import('./Components/Dialogs/Dialogs.js'));
@@ -20,8 +20,16 @@ const LoginPageContainer = React.lazy(() => import('./Components/Login/LoginPage
 
 
 class App extends Component {
+    catchAllUnhandledError = (promiseRejectionEvent) => {
+        
+    }
     componentDidMount() {
         this.props.initialize();
+        this.props.getNewMessages();
+        window.addEventListener('unhandledrejection', this.catchAllUnhandledError);
+    }
+    componentWillUnmount() {
+        window.removeEventListener('unhandledrejection', this.catchAllUnhandledError);
     }
 
     render() {
@@ -33,20 +41,20 @@ class App extends Component {
             <BrowserRouter>
                 <div className="app-wrapper">
                     <HeaderContainer/>
-                    <Navbar/>
+                    <Navbar newMessagesCount={this.props.newMessagesCount} />
                     <div className="container">
                         <Suspense fallback={<Preloader/>}>
                             <Switch>
                                 <Route path="/profile/:userId?" render={() => <ProfileContainer/>}/>
-                                <Route path="/dialogs" render={() => <Dialogs/>}/>
+                                <Route path="/dialogs/:userId?" render={() => <Dialogs/>}/>
                                 <Route path="/news" render={() => <News/>}/>
                                 <Route path="/music" render={() => <Music/>}/>
                                 <Route path="/setting" render={() => <Setting/>}/>
                                 <Route path="/users" render={() => <UsersContainer/>}/>
                                 <Route path="/friends" render={() => <FriendsContainer/>}/>
                                 <Route path="/login" render={() => <LoginPageContainer/>}/>
+                                <Route exact path="/" render={() => <Redirect to="/profile" />}/>
                                 <Route path="*" render={() => <div><h2>404 NOT FOUND</h2></div>}/>
-                                <Route path="/" render={() => <Redirect to="/profile" />}/>
                             </Switch>
                         </Suspense>
 
@@ -59,10 +67,11 @@ class App extends Component {
 
 const mapStateToProps = (state) => ({
     initialized: state.app.initialized,
+    newMessagesCount: state.dialogs.newMessagesCount,
 })
 
 export default compose(
     withRouter,
-    connect(mapStateToProps, {initialize})
+    connect(mapStateToProps, {initialize, getNewMessages})
 )(App);
 

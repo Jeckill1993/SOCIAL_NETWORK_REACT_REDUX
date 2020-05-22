@@ -1,4 +1,27 @@
-.item img {
+.item {
+    border: 1px solid #f7fef4;
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 15px;
+}
+.itemInfo {
+    display: flex;
+    text-align: center;
+    margin-bottom: 5px;
+    position: relative;
+}
+.itemInfo span {
+    padding: 10px;
+}
+.itemInfo img {
     width: 40px;
-    border-radius: 30px;;
+    height: 40px;
+    border-radius: 70px;
+}
+.itemLikeDislike {
+    padding: 10px;
+}
+.likeDislike {
+    width: 20px;
+    margin: 5px;
 }

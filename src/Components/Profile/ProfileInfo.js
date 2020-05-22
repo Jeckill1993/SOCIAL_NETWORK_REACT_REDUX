@@ -19,25 +19,33 @@ const ProfileInfo = ({profile, savePhotoSuccess, isOwner, status, updateStatus, 
         }
     }
     return (
-        <div>
+        <div className={classes.profileInfo}>
+            <h1>{profile.fullName}</h1>
             {
                 editMode ?
                     <PersonalInfoSetting setMyPersonalInfo={setMyPersonalInfo} setEditMode={setEditMode}/>
                     :
-                    <div className={classes.profileItem}>
-                        <div className={classes.mainInfo}>
-                            <img src={profile.photos.large || userPhoto} alt={'profile_photo'}/>
-                            {isOwner ? <input type={"file"} onChange={onMainPhotoSelected}/> : <span> </span>}
+                    <div className={classes.personalInfo}>
+                        <img className={classes.personalPhoto} src={profile.photos.large || userPhoto}
+                             alt={'profile_photo'}/>
                             <ProfileStatusWithHooks status={status} updateStatus={updateStatus}/>
-                            <div>{profile.aboutMe}</div>
-                            <div>{profile.lookingForAJob}</div>
-                            <div>{profile.lookingForAJobDescription}</div>
-                            <div>{profile.fullName}</div>
+                        <div className={classes.personalEdit}>
+                            {isOwner ? <input type={"file"} onChange={onMainPhotoSelected}/> : <span> </span>}
+                            <div>Open gallery</div>
                         </div>
-                        <div className={classes.contacts}>
-                            {contactItem}
+                        <div className={classes.personalContacts}>
+                            <div>
+                                <div>{profile.aboutMe}</div>
+                                <div>{profile.lookingForAJob}</div>
+                                <div>{profile.lookingForAJobDescription}</div>
+                                <div className={classes.contacts}>
+                                    {contactItem}
+                                </div>
+                            </div>
+                            {isOwner ? <button onClick={() => {
+                                setEditMode(true)
+                            }}>Edit</button> : <span> </span>}
                         </div>
-                        {isOwner ? <button onClick={() => {setEditMode(true)}}>Edit</button> : <span> </span>}
                     </div>
             }
         </div>

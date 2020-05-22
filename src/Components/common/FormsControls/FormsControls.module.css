@@ -1,4 +1,14 @@
-
+.loginForm {
+    width: 60%;
+    margin: auto;
+    border: 1px solid black;
+    padding: 20px;
+}
+.inputField {
+    width: 50%;
+    height: 2em;
+    margin: 5px;
+}
 
 .formControl.error input, .formControl.error textarea {
     border: solid 1px red;

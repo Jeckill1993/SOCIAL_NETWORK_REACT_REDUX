@@ -5,3 +5,26 @@
 .selected {
     font-weight: bold;
 }
+.usersList {
+    display: grid;
+    grid-template-rows: repeat(20, 1fr);
+    grid-template-columns: 1fr 1fr 1fr;
+}
+.userItem {
+    text-align: center;
+    padding: 15px;
+}
+.buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.buttons button {
+    width: 30%;
+    height: 30px;
+    background-color: #fb8505;
+    border-radius: 5px;
+    border: 1px solid #fb8505;
+    color: #f7fef4;
+    margin: 3px;
+}

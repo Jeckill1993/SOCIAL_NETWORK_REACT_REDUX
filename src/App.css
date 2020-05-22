@@ -45,13 +45,15 @@
   grid-template-rows: 100px 1fr;
   grid-template-columns: 2fr 10fr;
   grid-gap: 5px;
-  width: 80%;
+  width: 70%;
   margin: auto;
 }
 
 .container {
   grid-area: container;
-  background-color: rgb(207, 231, 216);
+  padding: 15px;
+  background-color: #11346c;
+/*rgba(211, 212, 218) change on the color*/
 }
 
 

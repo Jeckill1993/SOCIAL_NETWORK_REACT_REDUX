@@ -79,7 +79,7 @@ const followUnfollowFlow = async (dispatch, userId, apiMethod, actionCreator) =>
 
 let initialState = {
     users: [],
-    pageSize: 20,
+    pageSize: 60,
     portionSize: 10,
     totalUsersCount: 0,
     currentPage: 1,

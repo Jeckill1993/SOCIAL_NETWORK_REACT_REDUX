@@ -1,15 +1,17 @@
 import React from 'react';
 import Dialog from './Dialog/Dialog.js';
+import userPhoto from '../../../assets/images/user.jpg';
 
 
-const DialogsItem = (props) => {
-    let dialogsElements = props.dialogs.map((person) => {
-        return <Dialog name={person.name} key={person.id} id={person.id} avatar={person.avatar} />
+const DialogsItem = ({dialogs, getMessages, getNewMessages}) => {
+    let dialogsElements = dialogs.map((person) => {
+        return <Dialog userName={person.userName} key={person.id} id={person.id} getMessages={getMessages}
+                       photos={person.photos.small ? person.photos.small : userPhoto}/>
     });
 
     return (
         <div>{dialogsElements}</div>
     )
-    }
+}
 
-    export default DialogsItem;
+export default DialogsItem;

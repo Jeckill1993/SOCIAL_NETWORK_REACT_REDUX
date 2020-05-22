@@ -7,6 +7,7 @@ import {Input} from '../common/FormsControls/FormsControls.js';
 import {Redirect} from 'react-router-dom';
 import classes from './../common/FormsControls/FormsControls.module.css';
 
+
 let maxLength = maxLengthCreator(30);
 
 
@@ -14,10 +15,10 @@ const LoginForm = ({handleSubmit, error}) => {
     return (
         <form onSubmit={handleSubmit}>
             <div>
-                <Field placeholder="Email" name="email" component={Input} validate={[required, maxLength]}/>
+                <Field className={classes.inputField} placeholder="Email" name="email" component={Input} validate={[required, maxLength]}/>
             </div>
             <div>
-                <Field placeholder="Password" name="password" component={Input} validate={[required, maxLength]}/>
+                <Field className={classes.inputField} placeholder="Password" name="password" component={Input} validate={[required, maxLength]}/>
             </div>
             <div>
                 <Field type="checkbox" name="rememberMe" component="input"/>Remember me
@@ -41,8 +42,8 @@ const LoginPage = ({setMyLoginData, isAuth, userId}) => {
     }
 
     return (
-        <div>
-            <h1>Login</h1>
+        <div className={classes.loginForm}>
+            <h2>Login</h2>
             <LoginReduxForm onSubmit={onSubmit}/>
             <h3>{userId}</h3>
         </div>

@@ -1,17 +1,19 @@
 import React from 'react';
 import userPhoto from '../../../assets/images/user.jpg';
 import classes from './../Users.module.css';
-import { NavLink } from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 
 
-const User = ({ user, followingInProgress, unfollow, follow }) => {
+const User = ({user, followingInProgress, unfollow, follow}) => {
     return (
-        <div>
-            <span>
+        <div className={classes.userItem}>
+            <div>
                 <div>
-                    <NavLink to={`profile/${user.id}`}><img className={classes.userPhoto} src={user.photos.small != null ? user.photos.small : userPhoto} alt="avatar"/></NavLink>
+                    <NavLink to={`profile/${user.id}`}><img className={classes.userPhoto}
+                                                            src={user.photos.small != null ? user.photos.small : userPhoto}
+                                                            alt="avatar"/></NavLink>
                 </div>
-                <div>
+                <div className={classes.buttons}>
                     {user.followed
                         ? <button disabled={followingInProgress.some(id => id === user.id)} onClick={() => {
                             unfollow(user.id);
@@ -19,18 +21,19 @@ const User = ({ user, followingInProgress, unfollow, follow }) => {
                         : <button disabled={followingInProgress.some(id => id === user.id)} onClick={() => {
                             follow(user.id);
                         }}>Follow</button>}
+                        <NavLink to={`dialogs/${user.id}`}><button>Send message</button></NavLink>
                 </div>
-            </span>
-            <span>
-                <span>
+            </div>
+            <div>
+                <div>
                     <div>{user.name}</div>
                     <div>{user.status}</div>
-                </span>
-                <span>
+                </div>
+                <div>
                     <div>{"user.location.country"}</div>
                     <div>{"user.location.city"}</div>
-                </span>
-            </span>
+                </div>
+            </div>
         </div>
     )
 }

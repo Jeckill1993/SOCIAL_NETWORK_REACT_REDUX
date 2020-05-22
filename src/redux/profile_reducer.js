@@ -77,10 +77,26 @@ export const setMyPersonalInfo = (data) => {
 
 let initialState = {
     posts: [
-        {id: 1, name: 'Dima', message: 'Oh I hate this girls!', likesCount: 12},
-        {id: 2, name: 'Jeka', message: 'I like swimming', likesCount: 12},
-        {id: 3, name: 'Vova', message: 'I need new phone', likesCount: 12},
-        {id: 4, name: 'Oleg', message: 'I am tester', likesCount: 12},
+        {
+            id: 1,
+            name: 'Yevhen Duplenko',
+            message: 'TypeScript starts from the same syntax and semantics that millions of JavaScript developers know today. Use existing JavaScript code, incorporate popular JavaScript libraries, and call TypeScript code from JavaScript.',
+        },
+        {
+            id: 2,
+            name: 'Yevhen Duplenko',
+            message: 'Enter Next.js, the React Framework. Next.js provides a solution to all of the above problems. But more importantly, it puts you and your team in the pit of success when building React applications.',
+        },
+        {
+            id: 3,
+            name: 'Yevhen Duplenko',
+            message: 'styled-components is the result of wondering how we could enhance CSS for styling React component systems. By focusing on a single use case we managed to optimize the experience for developers as well as the output for end users.',
+        },
+        {
+            id: 4,
+            name: 'Yevhen Duplenko',
+            message: 'Gatsby is an open source, modern website framework that builds performance into every site by leveraging the latest web technologies such as React and GraphQL. Create blazing fast apps and websites without needing to become a performance expert.',
+        },
     ],
     profile: null,
     status: null,

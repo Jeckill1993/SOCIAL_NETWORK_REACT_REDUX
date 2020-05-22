@@ -1,13 +1,10 @@
 .header {
     grid-area: header;
-    background-color: rgb(2, 29, 15);
+    background-color: #243137;
   }
   .header img {
     width: 7vw;
   }
   .login_block {
     float: right;
-  }
-  .login_block a {
-    color: rgb(233, 240, 231);
   }

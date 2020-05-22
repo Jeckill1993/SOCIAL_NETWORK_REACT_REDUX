@@ -1,15 +1,16 @@
 import React from 'react';
+import classes from './LoginStyles.module.css';
 
-
-const LogOutButton = (props) => {
-    let logOut = () => {
-        props.logOut();
+const LogOutButton = ({logOut, login}) => {
+    let onLogOut = () => {
+        logOut();
     }
 
     return (
-        <div>{props.login}
+        <div className={classes.loginInfoWrapper}>
+            <span className={classes.loginNickname}>{login}</span>
             <div>
-                <button onClick={logOut}>Log Out</button>
+                <button className={classes.buttonLoginLogout} onClick={onLogOut}>Log Out</button>
             </div>
         </div>
     )

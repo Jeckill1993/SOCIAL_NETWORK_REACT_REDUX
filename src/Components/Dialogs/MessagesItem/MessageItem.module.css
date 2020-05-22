@@ -1,0 +1,19 @@
+.messagesContainer {
+    display: grid;
+    grid-template-rows: 1fr 100px;
+    height: 96%;
+    background-color: #e6ffe0;
+    padding: 10px;
+
+}
+.messagesList {
+    border: 1px solid rgb(129, 155, 145);
+    background-color: #f7fff5;
+    margin-bottom: 20px;
+}
+.messageWrapper {
+    background-color: rgb(129, 155, 145);
+    margin: 5px;
+    padding: 5px;
+    border-radius: 15px;
+}

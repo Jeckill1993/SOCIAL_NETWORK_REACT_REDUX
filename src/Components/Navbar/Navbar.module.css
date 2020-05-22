@@ -1,17 +1,17 @@
 .nav {
     grid-area: nav;
-    background-color: rgb(129, 155, 145);
+    background-color: #243137;
     padding: 20px
   }
   .item {
     margin: 10px;
   }
   .item a{
-      color: rgb(198, 218, 199);
+      color: #637078;
       text-decoration: none;
       
   }
   .item a.active {
-      color: rgb(24, 39, 29);
+      color: #e54a18;
   }
   
