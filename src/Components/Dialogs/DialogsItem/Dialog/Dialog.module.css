@@ -1,8 +1,9 @@
 .dialog a{
     text-decoration: none;
+    color: #f7fef4;
 }
 .dialog a.active {
-    color: rgb(82, 28, 18);
+    color: #fb8505;
 }
 .item {
     display: flex;

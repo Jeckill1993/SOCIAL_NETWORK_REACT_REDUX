@@ -1,6 +1,7 @@
 import React from 'react';
 import Dialog from './Dialog/Dialog.js';
 import userPhoto from '../../../assets/images/user.jpg';
+import classes from '../Dialogs.module.css';
 
 
 const DialogsItem = ({dialogs, getMessages, getNewMessages}) => {

@@ -13,7 +13,27 @@
 }
 .messageWrapper {
     background-color: rgb(129, 155, 145);
-    margin: 5px;
+    margin: 10px;
     padding: 5px;
     border-radius: 15px;
+    width: 40%
+}
+.form textarea {
+    resize: none;
+    width: 99%;
+    height: 50px;
+    border: 1px solid rgb(129, 155, 145);
+}
+.form button {
+    background-color: rgb(129, 155, 145);
+    border: 1px solid rgb(129, 155, 145);
+    border-radius: 10px;
+    width: 10%;
+    height: 30px;
+    margin: 10px;
+}
+.form button:hover {
+    border-color: #3d3d39;
+    background-color: #3d3d39;
+    color: #e54a18;
 }

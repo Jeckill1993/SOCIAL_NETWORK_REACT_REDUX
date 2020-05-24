@@ -5,7 +5,7 @@ import {required} from '../../tools/validators/validators.js';
 import {maxLengthCreator} from '../../tools/validators/validators.js';
 import {Input} from '../common/FormsControls/FormsControls.js';
 import {Redirect} from 'react-router-dom';
-import classes from './../common/FormsControls/FormsControls.module.css';
+import classes from '../common/FormsControls/FormsControls.module.css';
 
 
 let maxLength = maxLengthCreator(30);
@@ -43,7 +43,7 @@ const LoginPage = ({setMyLoginData, isAuth, userId}) => {
 
     return (
         <div className={classes.loginForm}>
-            <h2>Login</h2>
+            <h2>Sign In</h2>
             <LoginReduxForm onSubmit={onSubmit}/>
             <h3>{userId}</h3>
         </div>

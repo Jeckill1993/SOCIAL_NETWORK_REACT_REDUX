@@ -1,8 +1,24 @@
 .loginForm {
     width: 60%;
     margin: auto;
-    border: 1px solid black;
+    border: 1px solid #f7fef4;
+    border-radius: 5px;
     padding: 20px;
+    color: #f7fef4;
+}
+.loginForm button {
+    width: 30%;
+    height: 30px;
+    background-color: #fb8505;
+    border-radius: 5px;
+    border: 1px solid #fb8505;
+    color: #f7fef4;
+    margin: 10px;
+}
+.loginForm button:hover {
+    border-color: #3d3d39;
+    background-color: #3d3d39;
+    color: #e54a18;
 }
 .inputField {
     width: 50%;

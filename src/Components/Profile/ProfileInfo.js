@@ -23,7 +23,7 @@ const ProfileInfo = ({profile, savePhotoSuccess, isOwner, status, updateStatus, 
             <h1>{profile.fullName}</h1>
             {
                 editMode ?
-                    <PersonalInfoSetting setMyPersonalInfo={setMyPersonalInfo} setEditMode={setEditMode}/>
+                    <PersonalInfoSetting setMyPersonalInfo={setMyPersonalInfo} setEditMode={setEditMode} contacts={profile.contacts}/>
                     :
                     <div className={classes.personalInfo}>
                         <img className={classes.personalPhoto} src={profile.photos.large || userPhoto}

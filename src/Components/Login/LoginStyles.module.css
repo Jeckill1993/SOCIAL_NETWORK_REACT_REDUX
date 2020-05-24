@@ -20,6 +20,10 @@
 }
 .buttonLoginLogout a {
     text-decoration: none;
+    color: #637078;
+}
+.buttonLoginLogout a:hover {
+    color: white;
 }
 .buttonLoginLogout:hover {
     background-color: #e54a18;

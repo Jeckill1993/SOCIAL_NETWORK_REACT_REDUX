@@ -7,6 +7,13 @@ let maxLength = maxLengthCreator(30);
 
 
 const PersonalInfoSettingForm = (props) => {
+    let contacts = [];
+    for (let contact in props.contacts) {
+        contacts.push(props.contacts[contact]);
+    }
+    let contactItem = contacts.map((contact) => {
+        return <Field placeholder={contact} name={contact} component={Input}/>
+    })
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
@@ -22,23 +29,22 @@ const PersonalInfoSettingForm = (props) => {
             <div>
                 <Field placeholder={'full name'} name={'fullName'} component={Input}/>
             </div>
-            <div>
+            {contactItem}
                 <button>Save</button>
-            </div>
         </form>
     )
 }
 
 const Form = reduxForm({form: 'personalInfo'})(PersonalInfoSettingForm);
 
-const PersonalInfoSetting = ({setMyPersonalInfo, setEditMode}) => {
+const PersonalInfoSetting = ({setMyPersonalInfo, setEditMode, contacts}) => {
     const setInfo = (formData) => {
         setMyPersonalInfo(formData);
         setEditMode(false);
     }
     return (
         <div>
-            <Form onSubmit={setInfo}/>
+            <Form onSubmit={setInfo} contacts={contacts}/>
         </div>
     )
 }
