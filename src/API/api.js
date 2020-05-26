@@ -4,7 +4,7 @@ import * as Axios from 'axios';
 const instance = Axios.create({
     withCredentials: true,
     headers: {
-        "API-KEY": "ad631ad0-d20d-452d-9853-a4c3da20d413"
+        "API-KEY": "ad631ad0-d20d-452d-9853-a4c3da20d413",
     },
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
 });
@@ -41,7 +41,9 @@ export const profileAPI = {
         })
     },
     updateStatus: (status) => {
-        return instance.put(`/profile/status`, {status: status});
+        return instance.put(`/profile/status`, {status: status}).then(response => {
+            return response.data;
+        });
     },
     savePhoto: (photoFile) => {
         let formData = new FormData();

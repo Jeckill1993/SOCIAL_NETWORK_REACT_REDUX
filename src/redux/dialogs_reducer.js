@@ -77,7 +77,7 @@ export const getNewMessages = () => {
 let initialState = {
     dialogs: [],
     messages:[],
-    newMessagesCount: null,
+    newMessagesCount: 0,
     currentDialog: {}
 }
 

@@ -4,7 +4,7 @@ const ADD_POST = 'social-network/profile/ADD-POST';
 const SET_USER_PROFILE = 'social-network/profile/SET-USER-PROFILE';
 const SET_STATUS = 'social-network/profile/SET-STATUS';
 //const DELETE_POST = 'social-network/profile/DELETE-POST';
-const SAVE_PHOTO = 'SAVE-PHOTO';
+const SAVE_PHOTO = 'social-network/profile/SAVE-PHOTO';
 
 
 //action creators (return actions)
@@ -51,8 +51,8 @@ export const getStatus = (userId) => {
 export const updateStatus = (status) => {
     return async (dispatch) => {
         let response = await profileAPI.updateStatus(status);
-        if (response.data.resultCode === 0) {
-            dispatch(getStatus(response.data));
+        if (response.resultCode === 0) {
+            dispatch(setStatus(status));
         }
     }
 }

@@ -33,8 +33,8 @@ export const setMyLoginDataThunkCreator = (data) => {
 }
 export const logOutThunkCreator = () => {
     return async (dispatch) => {
-        let data = await authAPI.logOut();
-            if (data.resultCode === 0) {
+        let response = await authAPI.logOut();
+            if (response.data.resultCode === 0) {
                 dispatch(setAuthUserData(null, null, null, false));
             }
     }
@@ -44,8 +44,8 @@ let initialState = {
     userId: null,
     login: null,
     email: null,
-    isFetching: false,
     isAuth: false,
+    isFetching: false,
 }
 
 const authReducer = (state = initialState, action) => {

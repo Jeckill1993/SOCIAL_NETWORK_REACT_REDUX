@@ -27,7 +27,7 @@ class Dialogs extends React.Component {
         return (
             <div className={classes.dialogs}>
                 <DialogsItem dialogs={this.props.dialogs} getMessages={this.props.getMessages} />
-                <MessageItem messages={this.props.messages} sendMessage={this.props.sendMessage} currentId={this.props.match.params.userId} />
+                <MessageItem messages={this.props.messages} getMessages={this.props.getMessages} sendMessage={this.props.sendMessage} currentId={this.props.match.params.userId} />
             </div>
         )
     }

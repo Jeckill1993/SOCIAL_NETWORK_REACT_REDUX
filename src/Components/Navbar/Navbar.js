@@ -10,7 +10,7 @@ const Navbar = ({newMessagesCount}) => {
             <div className={classes.item}><NavLink to="/profile" activeClassName={classes.active}>Profile</NavLink>
             </div>
             <div className={classes.item}><NavLink to="/dialogs"
-                                                   activeClassName={classes.active}>Messages {newMessagesCount === (0 || null) ?
+                                                   activeClassName={classes.active}>Messages {newMessagesCount === 0 ?
                 <span> </span> : <span>({newMessagesCount})</span>}</NavLink></div>
             <div className={classes.item}><NavLink to="/news" activeClassName={classes.active}>News</NavLink></div>
             <div className={classes.item}><NavLink to="/music" activeClassName={classes.active}>Music</NavLink></div>

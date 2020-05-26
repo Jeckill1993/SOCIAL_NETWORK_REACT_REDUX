@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Message from './Message/Message.js';
 import {reduxForm} from 'redux-form';
 import {Field} from 'redux-form';
@@ -24,12 +24,14 @@ const AddMessageForm = (props) => {
 
 const AddMessageFormRedux = reduxForm({form: "dialogAddMessageForm"})(AddMessageForm);
 
-const MessageItem = ({messages, sendMessage, currentId}) => {
+const MessageItem = ({messages, getMessages, sendMessage, currentId}) => {
+    useEffect(() => {
+        getMessages(currentId)
+    }, []);
     let messagesElements = messages.map((message) => {
         return <Message key={message.id} message={message.body}/>
     })
     let addNewMessage = (values) => {
-        console.log({userId: currentId, body: values.newMessageBody});
         sendMessage({userId: currentId, body: values.newMessageBody});
     }
     return (
