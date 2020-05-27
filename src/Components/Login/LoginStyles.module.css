@@ -14,9 +14,14 @@
     width: 100px;
     height: 30px;
     background-color: #243137;
-    border-radius: 5px;
+    border-radius: 10px;
     border: 1px solid #637078;
     color: #637078;
+}
+.buttonLoginLogout:hover {
+    background-color: #e54a18;
+    border-color: #e54a18;
+    color: white;
 }
 .buttonLoginLogout a {
     text-decoration: none;
@@ -25,8 +30,4 @@
 .buttonLoginLogout a:hover {
     color: white;
 }
-.buttonLoginLogout:hover {
-    background-color: #e54a18;
-    border-color: #e54a18;
-    color: white;
-}
+

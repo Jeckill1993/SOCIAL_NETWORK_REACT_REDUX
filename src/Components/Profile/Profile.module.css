@@ -1,10 +1,16 @@
-.profileContainer {
+.profileContainer, .personalInfo {
     display: grid;
-    grid-template-rows: 1fr 2fr;
+}
+.personalEdit, .personalContacts {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.profileContainer {
+    grid-template-rows: 3fr 6fr;
     color: #f7fef4;
 }
 .personalInfo {
-    display: grid;
     grid-template-areas:
     "photo status"
     "edit contacts";
@@ -31,23 +37,17 @@
 }
 .personalEdit {
     grid-area: edit;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
     padding: 30px;
     color: #f7fef4;
 }
 .personalContacts {
     grid-area: contacts;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
 }
 .personalContacts button {
-    width: 30%;
+    width: 100px;
     height: 30px;
     background-color: #fb8505;
-    border-radius: 5px;
+    border-radius: 10px;
     border: 1px solid #fb8505;
     color: #f7fef4;
 }

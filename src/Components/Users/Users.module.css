@@ -20,13 +20,14 @@
     align-items: center;
 }
 .buttons button {
-    width: 60%;
+    width: 100px;
     height: 30px;
     background-color: #fb8505;
-    border-radius: 5px;
+    border-radius: 10px;
     border: 1px solid #fb8505;
     color: #f7fef4;
     margin: 3px;
+    padding: 2px;
 }
 .buttons button:hover {
     border-color: #3d3d39;

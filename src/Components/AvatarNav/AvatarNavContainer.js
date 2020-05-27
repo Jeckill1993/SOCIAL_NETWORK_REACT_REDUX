@@ -1,4 +1,3 @@
-import React from 'react';
 import AvatarNav from './AvatarNav.js';
 import { connect } from 'react-redux';
 

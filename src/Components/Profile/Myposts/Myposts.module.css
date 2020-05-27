@@ -2,10 +2,10 @@
     position: relative;
 }
 .formAddPost button {
-    width: 15%;
+    width: 100px;
     height: 30px;
     background-color: #fb8505;
-    border-radius: 5px;
+    border-radius: 10px;
     border: 1px solid #fb8505;
     color: #f7fef4;
 }

@@ -8,7 +8,6 @@ const Header = (props) => {
   return (
     <header className={classes.header}>
       <img src="https://www.logaster.ru/blog/wp-content/uploads/sites/2/2018/10/0023_p_world-travel-logo_19.png" alt="logo"/>
-
       <div className={classes.login_block}>
         {props.isAuth
           ? <LogOutButton login={props.login} logOut={props.logOut}/>

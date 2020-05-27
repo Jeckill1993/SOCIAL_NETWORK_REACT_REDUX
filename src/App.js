@@ -15,7 +15,6 @@ const News = React.lazy(() => import('./Components/News/News.js'));
 const Music = React.lazy(() => import('./Components/Music/Music.js'));
 const Setting = React.lazy(() => import ('./Components/Setting/Setting.js'));
 const UsersContainer = React.lazy(() => import('./Components/Users/UsersContainer.js'));
-const FriendsContainer = React.lazy(() => import('./Components/Friends/FriendsContainer'));
 const LoginPageContainer = React.lazy(() => import('./Components/Login/LoginPageContainer.js'));
 
 
@@ -51,14 +50,13 @@ class App extends Component {
                                 <Route path="/music" render={() => <Music/>}/>
                                 <Route path="/setting" render={() => <Setting/>}/>
                                 <Route path="/users" render={() => <UsersContainer/>}/>
-                                <Route path="/friends" render={() => <FriendsContainer/>}/>
                                 <Route path="/login" render={() => <LoginPageContainer/>}/>
                                 <Route exact path="/" render={() => <Redirect to="/profile" />}/>
                                 <Route path="*" render={() => <div><h2>404 NOT FOUND</h2></div>}/>
                             </Switch>
                         </Suspense>
-
                     </div>
+
                 </div>
             </BrowserRouter>
         );

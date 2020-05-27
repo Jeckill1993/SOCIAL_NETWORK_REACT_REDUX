@@ -1,10 +1,10 @@
 import React from 'react';
-import preloader from './../../../assets/images/thumb.png';
+import preloader from '../../../assets/images/thumb.png';
 
 
 const Preloader = (props) => {
     return (
-        <img src={preloader}></img>
+        <img src={preloader} alt={'loading'}/>
     )
 }
 
