@@ -2,26 +2,17 @@ import React from 'react';
 import {reduxForm, Field} from "redux-form";
 import {Input} from "../common/FormsControls/FormsControls";
 import {maxLengthCreator, required} from "../../tools/validators/validators";
+import styles from './Profile.module.css';
 
 let maxLength = maxLengthCreator(30);
 
 
 const PersonalInfoSettingForm = (props) => {
-    let contacts = [];
-    for (let contact in props.contacts) {
-        contacts.push(props.contacts[contact]);
-    }
-    let contactItem = contacts.map((contact) => {
-        return <Field placeholder={contact} name={contact} component={Input}/>
-    })
     return (
-        <form onSubmit={props.handleSubmit}>
+        <form className={styles.editContactForm} onSubmit={props.handleSubmit}>
             <div>
                 <Field placeholder={'about me'} name={'aboutMe'} component={Input}
                        validate={[required, maxLength]}/>
-            </div>
-            <div>
-                <Field placeholder={'looking for a job'} name={'lookingForAJob'} component={Input}/>
             </div>
             <div>
                 <Field placeholder={'description'} name={'lookingForAJobDescription'} component={Input}/>
@@ -29,7 +20,9 @@ const PersonalInfoSettingForm = (props) => {
             <div>
                 <Field placeholder={'full name'} name={'fullName'} component={Input}/>
             </div>
-            {contactItem}
+            {Object.keys(props.contacts).map(key => {
+                return <Field id={key} placeholder={key} name={`contacts.${key}`} component={Input}/>
+            })}
                 <button>Save</button>
         </form>
     )

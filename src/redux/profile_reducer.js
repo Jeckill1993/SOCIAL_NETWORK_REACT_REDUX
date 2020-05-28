@@ -1,4 +1,5 @@
 import {profileAPI} from '../API/api.js';
+import store from './redux_store'
 
 const ADD_POST = 'social-network/profile/ADD-POST';
 const SET_USER_PROFILE = 'social-network/profile/SET-USER-PROFILE';
@@ -65,11 +66,11 @@ export const savePhotoSuccess = (file) => {
     }
 }
 export const setMyPersonalInfo = (data) => {
-    //const userId = getState().auth.userId;
+    const userId = store.getState().auth.userId;
     return async (dispatch) => {
         let response = await profileAPI.setInfo(data);
-        if (response.data.resultCode === 0) {
-            getProfileThunkCreator(response.data.data.id);
+        if (response.resultCode === 0) {
+            dispatch(getProfileThunkCreator(userId));
         }
     }
 }

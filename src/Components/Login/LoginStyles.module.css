@@ -1,8 +1,8 @@
 .loginInfoWrapper {
-    height: 70px;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    height: 70px;
     margin: 10px;
     padding: 5px;
 }
@@ -14,9 +14,10 @@
     width: 100px;
     height: 30px;
     background-color: #243137;
-    border-radius: 10px;
     border: 1px solid #637078;
+    border-radius: 10px;
     color: #637078;
+    cursor: pointer;
 }
 .buttonLoginLogout:hover {
     background-color: #e54a18;
@@ -30,4 +31,29 @@
 .buttonLoginLogout a:hover {
     color: white;
 }
+
+.loginForm {
+    width: 60%;
+    margin: auto;
+    border-radius: 5px;
+    padding: 20px;
+    text-align: center;
+}
+.loginForm button {
+    width: 100px;
+    height: 30px;
+    border-radius: 10px;
+    margin: 10px;
+}
+.inputField {
+    width: 70%;
+    height: 2em;
+    margin: 5px;
+    color: #243137;
+    border: 1px solid #243137;
+    border-radius: 10px;
+}
+
+
+
 

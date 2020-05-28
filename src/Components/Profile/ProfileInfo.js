@@ -3,6 +3,7 @@ import classes from "./Profile.module.css";
 import userPhoto from "../../assets/images/user.jpg";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 import PersonalInfoSetting from "./PersonalnfoSetting";
+import {NavLink} from "react-router-dom";
 
 const ProfileInfo = ({profile, savePhotoSuccess, isOwner, status, updateStatus, setMyPersonalInfo}) => {
     let [editMode, setEditMode] = useState(false);
@@ -10,8 +11,9 @@ const ProfileInfo = ({profile, savePhotoSuccess, isOwner, status, updateStatus, 
     for (let contact in profile.contacts) {
         contacts.push(profile.contacts[contact]);
     }
+    console.log(contacts);
     let contactItem = contacts.map((contact) => {
-        return <div>{contact}</div>
+        return <div><a>{contact}</a></div>
     })
     const onMainPhotoSelected = (e) => {
         if (e.target.files.length) {
@@ -23,17 +25,17 @@ const ProfileInfo = ({profile, savePhotoSuccess, isOwner, status, updateStatus, 
             <h1>{profile.fullName}</h1>
             {
                 editMode ?
-                    <PersonalInfoSetting setMyPersonalInfo={setMyPersonalInfo} setEditMode={setEditMode} contacts={profile.contacts}/>
+                    <PersonalInfoSetting setMyPersonalInfo={setMyPersonalInfo} setEditMode={setEditMode}
+                                         contacts={profile.contacts}/>
                     :
                     <div className={classes.personalInfo}>
-                        <img className={classes.personalPhoto} src={profile.photos.large || userPhoto}
-                             alt={'profile_photo'}/>
-                            <ProfileStatusWithHooks status={status} updateStatus={updateStatus}/>
-                        <div className={classes.personalEdit}>
+                        <div className={classes.personalPhoto}>
+                            <img src={profile.photos.large || userPhoto}
+                                 alt={'profile_photo'}/>
                             {isOwner ? <input type={"file"} onChange={onMainPhotoSelected}/> : <span> </span>}
-                            <div>Open gallery</div>
                         </div>
                         <div className={classes.personalContacts}>
+                            <ProfileStatusWithHooks status={status} updateStatus={updateStatus}/>
                             <div>
                                 <div>{profile.aboutMe}</div>
                                 <div>{profile.lookingForAJob}</div>

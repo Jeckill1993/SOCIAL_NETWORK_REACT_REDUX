@@ -1,46 +1,55 @@
 @media (min-width: 320px) {
     .app-wrapper {
-        display: grid;
-        grid-template-areas: "header" "nav" "container";
-        grid-template-rows: 100px 2fr 9fr;
         width: 100%;
     }
-}
-
-@media (min-width: 768px) {
-    .app-wrapper {
-        grid-template-areas: "header header" "nav container";
-        display: grid;
-        grid-template-rows: 100px 1fr;
-        grid-template-columns: 1fr 10fr;
-        width: 70%;
+    .main {
+        flex-direction: column;
     }
 }
-
-@media (min-width: 1200px) {
+@media (min-width: 769px) {
     .app-wrapper {
-        grid-template-areas: "header header" "nav container";
-        display: grid;
-        grid-template-rows: 100px 1fr;
-        grid-template-columns: 2fr 10fr;
+        width: 100%;
+    }
+    .main {
+        flex-direction: column;
+    }
+}
+@media (min-width: 1025px) {
+    .app-wrapper {
         width: 70%;
+    }
+    .main {
+        flex-direction: row;
     }
 }
 
 .app-wrapper {
-    margin: 0px auto;
-    display: grid;
-    grid-gap: 5px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    font-size: 18px;
+    color: #243137;
 }
-
-.container {
-    grid-area: container;
+.main {
+    display: flex;
+}
+/*global styles*/
+.main button {
+    width: 60px;
+    height: 30px;
+    background-color: #a05121;
+    border: 1px solid #a05121;
+    border-radius: 10px;
+    color: #f7fef4;
+    cursor: pointer;
+}
+.main button:hover {
+    border-color: #243137;
+    background-color: #243137;
+    color: #637078;
+}
+.content {
+    flex: 3 3 90%;
     padding: 15px;
-    background-color: #11346c;
-    /*rgba(211, 212, 218) change on the color*/
-}
-
-
-.test {
-    color: rgb(167, 167, 221);
+    background-color: #50777b;
 }

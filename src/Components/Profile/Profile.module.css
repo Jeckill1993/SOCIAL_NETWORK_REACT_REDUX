@@ -1,58 +1,36 @@
-.profileContainer, .personalInfo {
-    display: grid;
-}
-.personalEdit, .personalContacts {
+.profileContainer, .personalInfo, .personalEdit, .personalContacts, .personalPhoto, .personalContacts {
     display: flex;
+}
+.profileContainer, .personalPhoto, .personalContacts {
     flex-direction: column;
-    justify-content: space-around;
-}
-.profileContainer {
-    grid-template-rows: 3fr 6fr;
-    color: #f7fef4;
-}
-.personalInfo {
-    grid-template-areas:
-    "photo status"
-    "edit contacts";
-    grid-template-rows: 1fr 1fr;
-    grid-template-columns: 1fr 1fr;
 }
 .personalPhoto {
-    grid-area: photo;
+    flex-basis: 50%;
+}
+.personalPhoto img{
     width: 180px;
     border-radius: 50%;
     padding: 10px;
 }
-.personalStatus {
-    grid-area: status;
+.personalContacts {
+    justify-content: space-around;
+    flex-basis: 50%;
+}
+.status {
     position: relative;
 }
-.personalStatus input {
-    width: 100%;
+.status input, .editContactForm input {
     height: 30px;
-    background-color: #11346c;
-    border-radius: 5px;
-    border: 1px solid #f7fef4;
-    color: #f7fef4;
-}
-.personalEdit {
-    grid-area: edit;
-    padding: 30px;
-    color: #f7fef4;
-}
-.personalContacts {
-    grid-area: contacts;
-}
-.personalContacts button {
-    width: 100px;
-    height: 30px;
-    background-color: #fb8505;
+    background-color: #f2f4f1;
+    border: 1px solid #314546;
     border-radius: 10px;
-    border: 1px solid #fb8505;
-    color: #f7fef4;
+    color: #314546;
 }
-.personalContacts button:hover {
-    border-color: #3d3d39;
-    background-color: #3d3d39;
-    color: #e54a18;
+.status input {
+    width: 80%;
+
+}
+.editContactForm input {
+    width: 300px;
+    margin-bottom: 10px;
 }

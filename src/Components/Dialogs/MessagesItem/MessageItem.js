@@ -5,7 +5,7 @@ import {Field} from 'redux-form';
 import {Textarea} from '../../common/FormsControls/FormsControls.js';
 import {required} from '../../../tools/validators/validators.js';
 import {maxLengthCreator} from '../../../tools/validators/validators.js';
-import classes from './MessageItem.module.css'
+import classes from '../Dialogs.module.css'
 
 let maxLength = maxLengthCreator(30);
 

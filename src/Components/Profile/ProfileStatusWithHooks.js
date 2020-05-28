@@ -21,7 +21,7 @@ const ProfileStatusWithHooks = ({status, updateStatus}) => {
     }
 
     return (
-        <div className={classes.personalStatus}>
+        <div className={classes.status}>
                 {
                     editMode ?
                         <input type="text" onChange={onStatusChange} onBlur={deactivateEditMode} autoFocus={true}

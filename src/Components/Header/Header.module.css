@@ -1,5 +1,4 @@
-.header {
-    grid-area: header;
+.header, .footer, .footer button {
     background-color: #243137;
   }
   .header img {
@@ -7,4 +6,23 @@
   }
   .login_block {
     float: right;
+  }
+
+  .footer {
+      display: flex;
+     justify-content: center;
+  }
+  .footer button {
+      width: 150px;
+      height: 30px;
+      border: 1px solid #637078;
+      border-radius: 10px;
+      color: #637078;
+      cursor: pointer;
+      margin: 10px;
+  }
+  .footer button:hover {
+      background-color: #e54a18;
+      border-color: #e54a18;
+      color: white;
   }

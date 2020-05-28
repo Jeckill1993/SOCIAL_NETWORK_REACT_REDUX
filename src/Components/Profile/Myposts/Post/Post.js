@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from './Post.module.css';
+import classes from '../Myposts.module.css';
 import like from '../../../../assets/images/like.png';
 import dislike from '../../../../assets/images/dislike.png';
 
