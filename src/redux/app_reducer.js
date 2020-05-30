@@ -1,13 +1,20 @@
 import { getAuthDataThunkCreator } from './auth_reducer.js';
 
 const SET_INITIALIZED = 'social-network/app/SET-INITIALIZED';
+const CHANGE_THEME = 'CHANGE_THEME';
 
 //action creator
 export const setInitialized = () => {
     return {
         type: SET_INITIALIZED,
     }
-} 
+}
+export const changeThemeAC = (theme) => {
+    return {
+        type: CHANGE_THEME,
+        theme,
+    }
+}
 
 //thunk creator, side effect
 export const initialize = () => {
@@ -30,6 +37,11 @@ const appReducer = (state = initialState, action) => {
             return {
                 ...state,
                 initialized: true,
+            }
+        case CHANGE_THEME:
+            return {
+                ...state,
+                theme: action.theme,
             }
         default:
             return state;

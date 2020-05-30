@@ -17,7 +17,7 @@ const AddMessageForm = (props) => {
             <div>
                 <Field component={Textarea} name="newMessageBody" placeholder="Enter your message"
                        validate={[required, maxLength]}/>
-                <button className={`runnyTheme_contentBtn`}>Send</button>
+                <button className={`${props.theme}_contentBtn`}>Send</button>
             </div>
         </form>
     )
@@ -25,7 +25,7 @@ const AddMessageForm = (props) => {
 
 const AddMessageFormRedux = reduxForm({form: "dialogAddMessageForm"})(AddMessageForm);
 
-const MessageItem = ({messages, getMessages, sendMessage, currentId}) => {
+const MessageItem = ({messages, getMessages, sendMessage, currentId, theme}) => {
     useEffect(() => {
         getMessages(currentId)
     }, []);
@@ -40,10 +40,10 @@ const MessageItem = ({messages, getMessages, sendMessage, currentId}) => {
             {currentId === undefined ?
                 <span> </span>
                 : <div className={classes.messagesContainer}>
-                    <div className={`${classes.messagesList} runnyTheme_messagesList`}>
+                    <div className={`${classes.messagesList} ${theme}_messagesList`}>
                         {messagesElements}
                     </div>
-                    <AddMessageFormRedux onSubmit={addNewMessage}/>
+                    <AddMessageFormRedux onSubmit={addNewMessage} theme={theme}/>
                 </div>
             }
         </div>

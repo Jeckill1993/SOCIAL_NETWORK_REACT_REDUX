@@ -13,7 +13,7 @@ import styles from './LoginStyles.module.css';
 let maxLength = maxLengthCreator(30);
 
 
-const LoginForm = ({handleSubmit, error}) => {
+const LoginForm = ({handleSubmit, error, ...props}) => {
     return (
         <form onSubmit={handleSubmit}>
             <div>
@@ -27,7 +27,7 @@ const LoginForm = ({handleSubmit, error}) => {
             </div>
             {error && <div className={stylesError.formSummaryError}>{error}</div>}
             <div>
-                <button className={`runnyTheme_contentBtn`}>Login</button>
+                <button className={`${props.theme}_contentBtn`}>Login</button>
             </div>
         </form>
     )
@@ -46,7 +46,7 @@ const LoginPage = ({setMyLoginData, isAuth, userId, theme}) => {
     return (
         <div className={styles.loginForm}>
             <h2>Sign In</h2>
-            <LoginReduxForm onSubmit={onSubmit}/>
+            <LoginReduxForm onSubmit={onSubmit} theme={theme}/>
             <h3>{userId}</h3>
         </div>
     )

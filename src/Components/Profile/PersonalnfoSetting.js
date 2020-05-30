@@ -24,21 +24,21 @@ const PersonalInfoSettingForm = (props) => {
             {Object.keys(props.contacts).map(key => {
                 return <Field id={key} placeholder={key} name={`contacts.${key}`} component={Input}/>
             })}
-                <button className={`runnyTheme_contentBtn`}>Save</button>
+                <button className={`${props.theme}_contentBtn`}>Save</button>
         </form>
     )
 }
 
 const Form = reduxForm({form: 'personalInfo'})(PersonalInfoSettingForm);
 
-const PersonalInfoSetting = ({setMyPersonalInfo, setEditMode, contacts}) => {
+const PersonalInfoSetting = ({setMyPersonalInfo, setEditMode, contacts, theme}) => {
     const setInfo = (formData) => {
         setMyPersonalInfo(formData);
         setEditMode(false);
     }
     return (
         <div>
-            <Form onSubmit={setInfo} contacts={contacts}/>
+            <Form onSubmit={setInfo} contacts={contacts} theme={theme}/>
         </div>
     )
 }

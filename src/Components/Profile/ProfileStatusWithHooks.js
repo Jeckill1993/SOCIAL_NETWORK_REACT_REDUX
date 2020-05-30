@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import classes from './Profile.module.css';
 
-const ProfileStatusWithHooks = ({status, updateStatus}) => {
+const ProfileStatusWithHooks = ({status, updateStatus, theme}) => {
     let [editMode, setEditMode] = useState(false);
     let [localStatus, setStatus] = useState(status);
 
@@ -24,7 +24,7 @@ const ProfileStatusWithHooks = ({status, updateStatus}) => {
         <div className={classes.status}>
                 {
                     editMode ?
-                        <input className={`runnyTheme_inputs_textarea`} type="text" onChange={onStatusChange} onBlur={deactivateEditMode} autoFocus={true}
+                        <input className={`${theme}_inputs_textarea`} type="text" onChange={onStatusChange} onBlur={deactivateEditMode} autoFocus={true}
                                value={localStatus}/>
                         :
                         <span onDoubleClick={activateEditMode}>{status || "not status"}</span>

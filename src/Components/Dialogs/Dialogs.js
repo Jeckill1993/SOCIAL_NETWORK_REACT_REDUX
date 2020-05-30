@@ -26,8 +26,11 @@ class Dialogs extends React.Component {
     render() {
         return (
             <div className={classes.dialogs}>
-                <DialogsItem dialogs={this.props.dialogs} getMessages={this.props.getMessages} />
-                <MessageItem messages={this.props.messages} getMessages={this.props.getMessages} sendMessage={this.props.sendMessage} currentId={this.props.match.params.userId} />
+                <DialogsItem dialogs={this.props.dialogs} getMessages={this.props.getMessages}
+                             theme={this.props.theme}/>
+                <MessageItem messages={this.props.messages} getMessages={this.props.getMessages}
+                             sendMessage={this.props.sendMessage} currentId={this.props.match.params.userId}
+                             theme={this.props.theme}/>
             </div>
         )
     }
@@ -37,15 +40,26 @@ let mapStateToProps = (state) => {
     return {
         dialogs: state.dialogs.dialogs,
         messages: state.dialogs.messages,
+        theme: state.app.theme,
     }
 }
 let mapDispatchToProps = (dispatch) => {
     return {
-        getDialogs: () => {dispatch(getDialogs())},
-        startDialog: (userId) => {dispatch(startDialog(userId))},
-        getMessages: (userId) => {dispatch(getMessages(userId))},
-        sendMessage: ({userId, body}) => {dispatch(sendMessage({userId, body}))},
-        setMessagesView: (messageId) => {dispatch(setMessagesView(messageId))},
+        getDialogs: () => {
+            dispatch(getDialogs())
+        },
+        startDialog: (userId) => {
+            dispatch(startDialog(userId))
+        },
+        getMessages: (userId) => {
+            dispatch(getMessages(userId))
+        },
+        sendMessage: ({userId, body}) => {
+            dispatch(sendMessage({userId, body}))
+        },
+        setMessagesView: (messageId) => {
+            dispatch(setMessagesView(messageId))
+        },
     }
 }
 

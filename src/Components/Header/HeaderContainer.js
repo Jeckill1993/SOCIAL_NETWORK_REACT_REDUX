@@ -6,6 +6,7 @@ import { logOutThunkCreator } from '../../redux/auth_reducer.js';
 const mapStateToProps = (state) => ({
     isAuth: state.auth.isAuth,
     login: state.auth.login,
+    theme: state.app.theme,
 });
 const HeaderContainer = connect(mapStateToProps, { logOut: logOutThunkCreator })(Header);
 

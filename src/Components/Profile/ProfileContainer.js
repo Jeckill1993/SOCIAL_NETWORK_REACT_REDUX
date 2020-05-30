@@ -37,7 +37,7 @@ class ProfileContainer extends React.Component {
 
     render() {
         return (
-            <Profile {...this.props} isOwner={!this.props.match.params.userId}  profile={this.props.profile} status={this.props.status}
+            <Profile {...this.props} isOwner={!this.props.match.params.userId}  profile={this.props.profile} status={this.props.status} theme={this.props.theme}
                      updateStatus={this.props.updateStatus} savePhotoSuccess={this.props.savePhotoSuccess} setMyPersonalInfo={this.props.setMyPersonalInfo}/>
         )
     }
@@ -47,6 +47,7 @@ let mapStateToProps = (state) => ({
     profile: state.profilePage.profile,
     status: state.profilePage.status,
     userId: state.auth.userId,
+    theme: state.app.theme,
 })
 
 export default compose(

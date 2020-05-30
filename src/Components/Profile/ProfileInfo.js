@@ -5,7 +5,7 @@ import userPhoto from "../../assets/images/user.jpg";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 import PersonalInfoSetting from "./PersonalnfoSetting";
 
-const ProfileInfo = ({profile, savePhotoSuccess, isOwner, status, updateStatus, setMyPersonalInfo}) => {
+const ProfileInfo = ({profile, savePhotoSuccess, isOwner, status, updateStatus, setMyPersonalInfo, theme}) => {
     let [editMode, setEditMode] = useState(false);
     let contacts = [];
     for (let contact in profile.contacts) {
@@ -26,7 +26,7 @@ const ProfileInfo = ({profile, savePhotoSuccess, isOwner, status, updateStatus, 
             {
                 editMode ?
                     <PersonalInfoSetting setMyPersonalInfo={setMyPersonalInfo} setEditMode={setEditMode}
-                                         contacts={profile.contacts}/>
+                                         contacts={profile.contacts} theme={theme}/>
                     :
                     <div className={classes.personalInfo}>
                         <div className={classes.personalPhoto}>
@@ -35,7 +35,7 @@ const ProfileInfo = ({profile, savePhotoSuccess, isOwner, status, updateStatus, 
                             {isOwner ? <input type={"file"} onChange={onMainPhotoSelected}/> : <span> </span>}
                         </div>
                         <div className={classes.personalContacts}>
-                            <ProfileStatusWithHooks status={status} updateStatus={updateStatus}/>
+                            <ProfileStatusWithHooks theme={theme} status={status} updateStatus={updateStatus}/>
                             <div>
                                 <div>{profile.aboutMe}</div>
                                 <div>{profile.lookingForAJob}</div>
@@ -44,7 +44,7 @@ const ProfileInfo = ({profile, savePhotoSuccess, isOwner, status, updateStatus, 
                                     {contactItem}
                                 </div>
                             </div>
-                            {isOwner ? <button className={`runnyTheme_contentBtn`} onClick={() => {
+                            {isOwner ? <button className={`${theme}_contentBtn`} onClick={() => {
                                 setEditMode(true)
                             }}>Edit</button> : <span> </span>}
                         </div>

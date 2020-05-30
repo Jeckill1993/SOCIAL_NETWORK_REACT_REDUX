@@ -6,7 +6,7 @@
 }
 .footer {
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
 }
 .footer button {
     width: 150px;

@@ -4,7 +4,7 @@ import './global_colors.css';
 import {connect} from 'react-redux';
 import {BrowserRouter, Redirect, Route, Switch, withRouter} from 'react-router-dom';
 import {compose} from 'redux';
-import {initialize} from './redux/app_reducer.js';
+import {initialize, changeThemeAC} from './redux/app_reducer.js';
 import Preloader from './Components/common/Preloader/Preloader.js';
 import HeaderContainer from './Components/Header/HeaderContainer.js';
 import Navbar from './Components/Navbar/Navbar.js';
@@ -40,11 +40,11 @@ class App extends Component {
 
         return (
             <BrowserRouter>
-                <div className={`app-wrapper ${this.props.theme ? 'runnyTheme_general' : 'sunnyTheme'}` }>
+                <div className={`app-wrapper ${this.props.theme}_general`}>
                     <HeaderContainer/>
                     <div className="main">
-                        <Navbar newMessagesCount={this.props.newMessagesCount} />
-                        <div className={`content ${this.props.theme ? 'runnyTheme_content' : 'sunnyTheme'}`}>
+                        <Navbar newMessagesCount={this.props.newMessagesCount} theme={this.props.theme}/>
+                        <div className={`content ${this.props.theme}_content`}>
                             <Suspense fallback={<Preloader/>}>
                                 <Switch>
                                     <Route path="/profile/:userId?" render={() => <ProfileContainer/>}/>
@@ -60,7 +60,7 @@ class App extends Component {
                             </Suspense>
                         </div>
                     </div>
-                    <Footer/>
+                    <Footer changeTheme={this.props.changeTheme} theme={this.props.theme}/>
                 </div>
             </BrowserRouter>
         );
@@ -75,6 +75,6 @@ const mapStateToProps = (state) => ({
 
 export default compose(
     withRouter,
-    connect(mapStateToProps, {initialize, getNewMessages})
+    connect(mapStateToProps, {initialize, getNewMessages, changeTheme: changeThemeAC})
 )(App);
 

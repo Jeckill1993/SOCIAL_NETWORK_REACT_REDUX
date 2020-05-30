@@ -39,7 +39,7 @@ class UsersContainer extends React.Component {
                    isFetching={this.props.isFetching}
                    followingInProgress={this.props.followingInProgress}
                    toogleFollowingProgress={this.props.toogleFollowingProgress}
-                   portionSize={this.props.portionSize}/>
+                   portionSize={this.props.portionSize} theme={this.props.theme}/>
         </>
     }
 }
@@ -54,6 +54,7 @@ let mapStateToProps = (state) => {
         isFetching: getIsFetching(state),
         followingInProgress: getFollowingInProgress(state),
         portionSize: state.usersPage.portionSize,
+        theme: state.app.theme,
     }
 }
 

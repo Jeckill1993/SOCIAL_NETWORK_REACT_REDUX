@@ -1,6 +1,9 @@
 import React from 'react';
 import classes from './FormsControls.module.css';
 import '../../../global_colors.css';
+import store from '../../../redux/redux_store';
+
+let theme = store.getState().app.theme;
 
 const FormControl = ({ input, meta: {touched, error}, child, ...props }) => {
     const hasError = touched && error;
@@ -14,10 +17,10 @@ const FormControl = ({ input, meta: {touched, error}, child, ...props }) => {
 
 export const Textarea = (props) => {
     const { input, meta, child, ...restProps } = props
-    return <FormControl {...props}><textarea className={`runnyTheme_inputs_textarea`} {...input} {...restProps}/></FormControl>
+    return <FormControl {...props}><textarea className={`${theme}_inputs_textarea`} {...input} {...restProps}/></FormControl>
 }
 
 export const Input = (props) => {
     const { input, meta, child, ...restProps } = props
-    return <FormControl {...props}><input type='text' className={`runnyTheme_inputs_textarea`} {...input} {...restProps}/></FormControl>
+    return <FormControl {...props}><input type='text' className={`${theme}_inputs_textarea`} {...input} {...restProps}/></FormControl>
 }
