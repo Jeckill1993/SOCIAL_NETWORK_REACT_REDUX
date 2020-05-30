@@ -22,34 +22,21 @@
         flex-direction: row;
     }
 }
-
+.app-wrapper, .main {
+    display: flex;
+}
 .app-wrapper {
     margin: 0 auto;
-    display: flex;
     flex-direction: column;
     font-size: 18px;
-    color: #243137;
 }
-.main {
-    display: flex;
-}
-/*global styles*/
 .main button {
     width: 60px;
     height: 30px;
-    background-color: #a05121;
-    border: 1px solid #a05121;
     border-radius: 10px;
-    color: #f7fef4;
     cursor: pointer;
-}
-.main button:hover {
-    border-color: #243137;
-    background-color: #243137;
-    color: #637078;
 }
 .content {
     flex: 3 3 90%;
     padding: 15px;
-    background-color: #50777b;
 }

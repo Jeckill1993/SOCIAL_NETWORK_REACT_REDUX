@@ -11,7 +11,6 @@
     }
 }
 .nav {
-    background-color: #243137;
     padding: 20px;
 }
 .item {
@@ -19,12 +18,7 @@
 }
 
 .item a {
-    color: #637078;
     text-decoration: none;
     font-size: 18px;
-}
-
-.item a.active {
-    color: #e54a18;
 }
   

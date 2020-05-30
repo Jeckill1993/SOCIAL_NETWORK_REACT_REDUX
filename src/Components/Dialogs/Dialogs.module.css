@@ -2,18 +2,9 @@
     display: grid;
     grid-template-columns: 2fr 8fr;
 }
-.messagesList, .form textarea {
-    background-color: #f2f4f1;
-    border: 1px solid #50777b;
-}
 .dialog a{
     text-decoration: none;
-    color: #243137;
 }
-.dialog a.active {
-    color: #a05121;
-}
-
 .item {
     display: flex;
     flex-direction: row;
@@ -33,9 +24,9 @@
 }
 .messagesList {
     margin-bottom: 20px;
+    border-radius: 10px;
 }
 .messageWrapper {
-    background-color: rgb(129, 155, 145);
     margin: 10px;
     padding: 5px;
     border-radius: 15px;
@@ -45,4 +36,5 @@
     resize: none;
     width: 99%;
     height: 50px;
+    border-radius: 10px;
 }

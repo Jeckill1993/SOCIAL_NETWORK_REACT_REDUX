@@ -18,21 +18,8 @@
     height: 20px;
     width: 20px;
     margin: 3px;
-    background-color: #a05121;
-    border: 1px solid #a05121;
     border-radius: 50%;
-    color: #f7fef4;
     text-align: center;
-}
-.paginationPages div:hover {
-    border-color: #243137;
-    background-color: #243137;
-    color: #637078;
-}
-.selected {
-    border-color: #3d3d39;
-    background-color: #3d3d39;
-    color: #e54a18;
 }
 .searchContainer {
     position: relative;
@@ -40,8 +27,6 @@
 .searchContainer input {
     width: 100px;
     height: 20px;
-    background-color: #f2f4f1;
-    border: 1px solid #50777b;
     border-radius: 10px;
 }
 .searchContainer button {

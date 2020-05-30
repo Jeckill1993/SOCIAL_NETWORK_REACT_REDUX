@@ -24,7 +24,7 @@ const ProfileStatusWithHooks = ({status, updateStatus}) => {
         <div className={classes.status}>
                 {
                     editMode ?
-                        <input type="text" onChange={onStatusChange} onBlur={deactivateEditMode} autoFocus={true}
+                        <input className={`runnyTheme_inputs_textarea`} type="text" onChange={onStatusChange} onBlur={deactivateEditMode} autoFocus={true}
                                value={localStatus}/>
                         :
                         <span onDoubleClick={activateEditMode}>{status || "not status"}</span>

@@ -1,4 +1,5 @@
 import React from 'react';
+import '../../global_colors.css';
 import {reduxForm} from 'redux-form';
 import {Field} from 'redux-form';
 import {required} from '../../tools/validators/validators.js';
@@ -26,7 +27,7 @@ const LoginForm = ({handleSubmit, error}) => {
             </div>
             {error && <div className={stylesError.formSummaryError}>{error}</div>}
             <div>
-                <button>Login</button>
+                <button className={`runnyTheme_contentBtn`}>Login</button>
             </div>
         </form>
     )
@@ -34,7 +35,7 @@ const LoginForm = ({handleSubmit, error}) => {
 
 const LoginReduxForm = reduxForm({form: 'login'})(LoginForm);
 
-const LoginPage = ({setMyLoginData, isAuth, userId}) => {
+const LoginPage = ({setMyLoginData, isAuth, userId, theme}) => {
     const onSubmit = (formData) => {
         setMyLoginData(formData);
     }

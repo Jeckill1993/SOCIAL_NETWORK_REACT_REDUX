@@ -1,4 +1,5 @@
 import React from 'react';
+import '../../../../global_colors.css';
 import classes from '../Myposts.module.css';
 import like from '../../../../assets/images/like.png';
 import dislike from '../../../../assets/images/dislike.png';
@@ -6,7 +7,7 @@ import dislike from '../../../../assets/images/dislike.png';
 
 const Post = ({name, message, photo}) => {
     return (
-        <div className={classes.item}>
+        <div className={`${classes.item} runnyTheme_border`}>
             <div className={classes.itemInfo}>
                 <img src={photo} alt="avatar"/>
                 <span>{name}</span>

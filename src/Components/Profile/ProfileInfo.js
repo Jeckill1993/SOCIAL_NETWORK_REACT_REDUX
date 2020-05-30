@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
+import '../../global_colors.css';
 import classes from "./Profile.module.css";
 import userPhoto from "../../assets/images/user.jpg";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 import PersonalInfoSetting from "./PersonalnfoSetting";
-import {NavLink} from "react-router-dom";
 
 const ProfileInfo = ({profile, savePhotoSuccess, isOwner, status, updateStatus, setMyPersonalInfo}) => {
     let [editMode, setEditMode] = useState(false);
@@ -44,7 +44,7 @@ const ProfileInfo = ({profile, savePhotoSuccess, isOwner, status, updateStatus, 
                                     {contactItem}
                                 </div>
                             </div>
-                            {isOwner ? <button onClick={() => {
+                            {isOwner ? <button className={`runnyTheme_contentBtn`} onClick={() => {
                                 setEditMode(true)
                             }}>Edit</button> : <span> </span>}
                         </div>

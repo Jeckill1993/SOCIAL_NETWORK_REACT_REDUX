@@ -6,6 +6,7 @@ let mapStateTpProps = (state) => {
     return {
         userId: state.auth.userId,
         isAuth: state.auth.isAuth,
+        theme: state.app.theme,
     }
 }
 const LoginPageContainer = connect(mapStateTpProps, { setMyLoginData: setMyLoginDataThunkCreator })(LoginPage);

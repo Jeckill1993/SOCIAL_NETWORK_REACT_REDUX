@@ -1,4 +1,5 @@
 import React from 'react';
+import '../../../global_colors.css';
 import {reduxForm} from 'redux-form';
 import {Field} from 'redux-form';
 import Post from './Post/Post.js';
@@ -13,7 +14,7 @@ const MyPostsForm = (props) => {
     return (
         <form className={classes.formAddPost} onSubmit={props.handleSubmit}>
             <Field component={Textarea} name="newPost" placeholder="Your news..." validate={[required, maxLength]}/>
-            <button>Send</button>
+            <button className={`runnyTheme_contentBtn`}>Send</button>
         </form>
     )
 }

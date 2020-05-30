@@ -1,0 +1,102 @@
+/*runnyTheme*/
+.runnyTheme_general, .runnyTheme_linksDialogs a, .runnyTheme_userItem {
+    color: #173440;
+}
+.runnyTheme_content {
+    background-color: #65858C;
+}
+.runnyTheme_backgroundColor_footer_header {
+    background-color: #173440;
+}
+.runnyTheme_backgroundColor_nav {
+    background-color: #315259;
+}
+.runnyTheme_contentBtn {
+    background-color: #9FBCBF;
+    border: 1px solid #9FBCBF;
+    color: #173440;
+}
+.runnyTheme_contentBtn:hover, .runnyTheme_paginationPages_Item:hover {
+    border-color: #173440;
+    background-color: #173440;
+    color: #F0F2F2;
+}
+.runnyTheme_inputs_textarea, .runnyTheme_messagesList {
+    background-color: #F0F2F2;
+    border: 1px solid #65858C;
+    color: #173440;
+}
+.runnyTheme_header_footerBtn {
+    background-color: #173440;
+    border: 1px solid #9FBCBF;
+    color: #9FBCBF;
+}
+.runnyTheme_header_footerBtn:hover, .runnyTheme_btn_LoginLogout:hover {
+    background-color: #e54a18;
+    border-color: #e54a18;
+    color: white;
+}
+.runnyTheme_linksDialogs a.active {
+    color: #e54a18;
+}
+.runnyTheme_nickname, .runnyTheme_nav_links a {
+    color: #9FBCBF;
+}
+.runnyTheme_nav_links a.active {
+    color: #e54a18;
+}
+.runnyTheme_border {
+    border: 1px solid #173440;
+}
+
+
+/*sunnyTheme*/
+.sunnyTheme_general, .sunnyTheme_linksDialogs a, .sunnyTheme_userItem {
+    color: #732002;
+}
+.sunnyTheme_content {
+    background-color: #F29F05;
+}
+.sunnyTheme_backgroundColor_footer_header {
+    background-color: #732002;
+}
+.sunnyTheme_backgroundColor_nav {
+    background-color: #D95204;
+}
+.sunnyTheme_contentBtn {
+    background-color: #D95204;
+    border: 1px solid #D95204;
+    color: #732002;
+}
+.sunnyTheme_contentBtn:hover, .sunnyTheme_paginationPages_Item:hover {
+    border-color: #732002;
+    background-color: #732002;
+    color: #F2CB05;
+}
+.sunnyTheme_inputs_textarea, .sunnyTheme_messagesList {
+    background-color: #F2CB05;
+    border: 1px solid #F29F05;
+    color: #732002;
+}
+.sunnyTheme_header_footerBtn {
+    background-color: #732002;
+    border: 1px solid #F29F05;
+    color: #F29F05;
+}
+.sunnyTheme_header_footerBtn:hover, .sunnyTheme_btn_LoginLogout:hover {
+    background-color: #e54a18;
+    border-color: #e54a18;
+    color: white;
+}
+.sunnyTheme_linksDialogs a.active {
+    color: #F2CB05;
+}
+.sunnyTheme_nickname, .sunnyTheme_nav_links a {
+    color: #F2CB05;
+}
+.sunnyTheme_nav_links a.active {
+    color: #732002;
+}
+.sunnyTheme_border {
+    border: 1px solid #732002;
+}

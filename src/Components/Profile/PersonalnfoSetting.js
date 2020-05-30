@@ -1,4 +1,5 @@
 import React from 'react';
+import '../../global_colors.css';
 import {reduxForm, Field} from "redux-form";
 import {Input} from "../common/FormsControls/FormsControls";
 import {maxLengthCreator, required} from "../../tools/validators/validators";
@@ -23,7 +24,7 @@ const PersonalInfoSettingForm = (props) => {
             {Object.keys(props.contacts).map(key => {
                 return <Field id={key} placeholder={key} name={`contacts.${key}`} component={Input}/>
             })}
-                <button>Save</button>
+                <button className={`runnyTheme_contentBtn`}>Save</button>
         </form>
     )
 }

@@ -21,6 +21,7 @@ export const initialize = () => {
 
 let initialState = {
     initialized: false,
+    theme: 'runnyTheme',
 }
 
 const appReducer = (state = initialState, action) => {

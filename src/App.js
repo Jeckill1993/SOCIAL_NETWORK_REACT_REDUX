@@ -1,5 +1,6 @@
 import React, {Suspense, Component} from 'react';
 import './App.css';
+import './global_colors.css';
 import {connect} from 'react-redux';
 import {BrowserRouter, Redirect, Route, Switch, withRouter} from 'react-router-dom';
 import {compose} from 'redux';
@@ -39,11 +40,11 @@ class App extends Component {
 
         return (
             <BrowserRouter>
-                <div className="app-wrapper">
+                <div className={`app-wrapper ${this.props.theme ? 'runnyTheme_general' : 'sunnyTheme'}` }>
                     <HeaderContainer/>
                     <div className="main">
                         <Navbar newMessagesCount={this.props.newMessagesCount} />
-                        <div className="content">
+                        <div className={`content ${this.props.theme ? 'runnyTheme_content' : 'sunnyTheme'}`}>
                             <Suspense fallback={<Preloader/>}>
                                 <Switch>
                                     <Route path="/profile/:userId?" render={() => <ProfileContainer/>}/>
@@ -68,6 +69,7 @@ class App extends Component {
 
 const mapStateToProps = (state) => ({
     initialized: state.app.initialized,
+    theme: state.app.theme,
     newMessagesCount: state.dialogs.newMessagesCount,
 })
 

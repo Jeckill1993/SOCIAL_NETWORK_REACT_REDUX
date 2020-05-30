@@ -6,16 +6,13 @@
     width: 100%;
     height: 200px;
     margin-bottom: 10px;
-    background-color: #f2f4f1;
-    border: 1px solid #50777b;
     border-radius: 10px;
-    color: #243137;
 }
-
-.item {
-    border: 1px solid #243137;
-    border-radius: 10px;
+.item, .itemInfo span, .itemLikeDislike {
     padding: 10px;
+}
+.item {
+    border-radius: 10px;
     margin-top: 15px;
 }
 .itemInfo {
@@ -24,16 +21,10 @@
     margin-bottom: 5px;
     position: relative;
 }
-.itemInfo span {
-    padding: 10px;
-}
 .itemInfo img {
     width: 40px;
     height: 40px;
     border-radius: 70px;
-}
-.itemLikeDislike {
-    padding: 10px;
 }
 .likeDislike {
     width: 20px;

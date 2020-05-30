@@ -1,4 +1,5 @@
 import React from 'react';
+import '../../global_colors.css';
 import classes from './LoginStyles.module.css';
 
 const LogOutButton = ({logOut, login}) => {
@@ -8,9 +9,9 @@ const LogOutButton = ({logOut, login}) => {
 
     return (
         <div className={classes.loginInfoWrapper}>
-            <span className={classes.loginNickname}>{login}</span>
+            <span className={`${classes.loginNickname} runnyTheme_nickname`}>{login}</span>
             <div>
-                <button className={classes.buttonLoginLogout} onClick={onLogOut}>Log Out</button>
+                <button className={`${classes.buttonLoginLogout} runnyTheme_header_footerBtn`} onClick={onLogOut}>Log Out</button>
             </div>
         </div>
     )

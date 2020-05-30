@@ -21,10 +21,7 @@
 }
 .status input, .editContactForm input {
     height: 30px;
-    background-color: #f2f4f1;
-    border: 1px solid #314546;
     border-radius: 10px;
-    color: #314546;
 }
 .status input {
     width: 80%;

@@ -1,4 +1,5 @@
 import React, {useEffect} from 'react';
+import '../../../global_colors.css';
 import Message from './Message/Message.js';
 import {reduxForm} from 'redux-form';
 import {Field} from 'redux-form';
@@ -16,7 +17,7 @@ const AddMessageForm = (props) => {
             <div>
                 <Field component={Textarea} name="newMessageBody" placeholder="Enter your message"
                        validate={[required, maxLength]}/>
-                <button>Send</button>
+                <button className={`runnyTheme_contentBtn`}>Send</button>
             </div>
         </form>
     )
@@ -39,7 +40,7 @@ const MessageItem = ({messages, getMessages, sendMessage, currentId}) => {
             {currentId === undefined ?
                 <span> </span>
                 : <div className={classes.messagesContainer}>
-                    <div className={classes.messagesList}>
+                    <div className={`${classes.messagesList} runnyTheme_messagesList`}>
                         {messagesElements}
                     </div>
                     <AddMessageFormRedux onSubmit={addNewMessage}/>

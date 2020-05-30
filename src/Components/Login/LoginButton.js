@@ -5,7 +5,7 @@ import classes from './LoginStyles.module.css';
 const LoginButton = (props) => {
     return (
         <div className={classes.loginInfoWrapper}>
-            <button className={classes.buttonLoginLogout}><NavLink to={'/login'}>Sign In</NavLink></button>
+            <NavLink to={'/login'}><button className={`${classes.buttonLoginLogout} runnyTheme_header_footerBtn`}>Sign In</button></NavLink>
         </div>
 
     )
