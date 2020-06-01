@@ -30,7 +30,7 @@ const MessageItem = ({messages, getMessages, sendMessage, currentId, theme}) => 
         getMessages(currentId)
     }, []);
     let messagesElements = messages.map((message) => {
-        return <Message key={message.id} message={message.body}/>
+        return <Message key={message.id} message={message.body} theme={theme}/>
     })
     let addNewMessage = (values) => {
         sendMessage({userId: currentId, body: values.newMessageBody});

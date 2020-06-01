@@ -2,10 +2,10 @@ import React from 'react';
 import '../../../../global_colors.css';
 import classes from '../../Dialogs.module.css';
 
-const Message = (props) => {
+const Message = ({message,theme}) => {
     return (
-        <div className={`${classes.messageWrapper} runnyTheme_content`}>
-            <span>{props.message}</span>
+        <div className={`${classes.messageWrapper} ${theme}_content`}>
+            <span>{message}</span>
         </div>
     )
 }

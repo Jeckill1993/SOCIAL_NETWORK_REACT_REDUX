@@ -6,6 +6,7 @@ let mapStateToProps = (state) => {
     return {
         posts: state.profilePage.posts,
         profile: state.profilePage.profile,
+        theme: state.app.theme,
     }
 }
 let mapDispatchToProps = (dispatch) => {

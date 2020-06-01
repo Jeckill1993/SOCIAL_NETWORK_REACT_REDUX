@@ -52,51 +52,51 @@
 
 /*sunnyTheme*/
 .sunnyTheme_general, .sunnyTheme_linksDialogs a, .sunnyTheme_userItem {
-    color: #732002;
+    color: #402A1E;
 }
 .sunnyTheme_content {
-    background-color: #F29F05;
+    background-color: #D2D9D6;
 }
 .sunnyTheme_backgroundColor_footer_header {
-    background-color: #732002;
+    background-color: #402A1E;
 }
 .sunnyTheme_backgroundColor_nav {
-    background-color: #D95204;
+    background-color: #8C8674;
 }
 .sunnyTheme_contentBtn {
-    background-color: #D95204;
-    border: 1px solid #D95204;
-    color: #732002;
+    background-color: #A67051;
+    border: 1px solid #A67051;
+    color: #D2D9D6;
 }
 .sunnyTheme_contentBtn:hover, .sunnyTheme_paginationPages_Item:hover {
-    border-color: #732002;
-    background-color: #732002;
-    color: #F2CB05;
+    border-color: #402A1E;
+    background-color: #402A1E;
+    color: #A67051;
 }
 .sunnyTheme_inputs_textarea, .sunnyTheme_messagesList {
-    background-color: #F2CB05;
-    border: 1px solid #F29F05;
-    color: #732002;
+    background-color: #F0F2F2;
+    border: 1px solid #8C8674;
+    color: #402A1E;
 }
 .sunnyTheme_header_footerBtn {
-    background-color: #732002;
-    border: 1px solid #F29F05;
-    color: #F29F05;
+    background-color: #402A1E;
+    border: 1px solid #D2D9D6;
+    color: #D2D9D6;
 }
 .sunnyTheme_header_footerBtn:hover, .sunnyTheme_btn_LoginLogout:hover {
-    background-color: #e54a18;
-    border-color: #e54a18;
-    color: white;
+    background-color: #D2D9D6;
+    border-color: #D2D9D6;
+    color: #73482F;
 }
 .sunnyTheme_linksDialogs a.active {
-    color: #F2CB05;
+    color: #A67051;
 }
 .sunnyTheme_nickname, .sunnyTheme_nav_links a {
-    color: #F2CB05;
+    color: #D2D9D6;
 }
 .sunnyTheme_nav_links a.active {
-    color: #732002;
+    color: #402A1E;
 }
 .sunnyTheme_border {
-    border: 1px solid #732002;
+    border: 1px solid #8C8674;
 }

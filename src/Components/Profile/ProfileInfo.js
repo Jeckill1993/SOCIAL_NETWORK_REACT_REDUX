@@ -11,7 +11,6 @@ const ProfileInfo = ({profile, savePhotoSuccess, isOwner, status, updateStatus, 
     for (let contact in profile.contacts) {
         contacts.push(profile.contacts[contact]);
     }
-    console.log(contacts);
     let contactItem = contacts.map((contact) => {
         return <div><a>{contact}</a></div>
     })
