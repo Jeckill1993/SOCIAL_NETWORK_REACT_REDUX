@@ -10,6 +10,7 @@ import HeaderContainer from './Components/Header/HeaderContainer.js';
 import Navbar from './Components/Navbar/Navbar.js';
 import {getNewMessages} from "./redux/dialogs_reducer";
 import Footer from "./Components/Footer/Footer";
+import {getNews} from "./redux/news_reducer";
 
 const ProfileContainer = React.lazy(() => import('./Components/Profile/ProfileContainer.js'));
 const Dialogs = React.lazy(() => import('./Components/Dialogs/Dialogs.js'));
@@ -27,6 +28,7 @@ class App extends Component {
     componentDidMount() {
         this.props.initialize();
         this.props.getNewMessages();
+        this.props.getNews();
         window.addEventListener('unhandledrejection', this.catchAllUnhandledError);
     }
     componentWillUnmount() {
@@ -49,7 +51,7 @@ class App extends Component {
                                 <Switch>
                                     <Route path="/profile/:userId?" render={() => <ProfileContainer/>}/>
                                     <Route path="/dialogs/:userId?" render={() => <Dialogs/>}/>
-                                    <Route path="/news" render={() => <News/>}/>
+                                    <Route path="/news" render={() => <News news={this.props.news}/>}/>
                                     <Route path="/music" render={() => <Music/>}/>
                                     <Route path="/setting" render={() => <Setting/>}/>
                                     <Route path="/users" render={() => <UsersContainer/>}/>
@@ -71,10 +73,11 @@ const mapStateToProps = (state) => ({
     initialized: state.app.initialized,
     theme: state.app.theme,
     newMessagesCount: state.dialogs.newMessagesCount,
+    news: state.news.news,
 })
 
 export default compose(
     withRouter,
-    connect(mapStateToProps, {initialize, getNewMessages, changeTheme: changeThemeAC})
+    connect(mapStateToProps, {initialize, getNewMessages, changeTheme: changeThemeAC, getNews})
 )(App);
 

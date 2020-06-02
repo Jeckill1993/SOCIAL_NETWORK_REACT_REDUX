@@ -1,10 +1,14 @@
 import React from 'react';
 //import classes from './News.module.css';
 
-const News = () =>{
+const News = ({news}) => {
+    debugger;
+    let newsItems = news.map(item => {
+        return <div>{item.author}</div>
+    })
     return (
         <div>
-            News
+            {newsItems}
         </div>
     )
 }

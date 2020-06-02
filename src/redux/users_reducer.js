@@ -1,5 +1,5 @@
 import { usersAPI } from '../API/api.js';
-import { updateObjectInArray } from './../tools/object-helpers.js';
+import { updateObjectInArray } from '../tools/object-helpers.js';
 
 const FOLLOW = 'social-network/users/FOLLOW';
 const UNFOLLOW = 'social-network/users/UNFOLLOW';

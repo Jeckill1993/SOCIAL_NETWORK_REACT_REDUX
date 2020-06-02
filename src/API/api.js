@@ -124,5 +124,13 @@ export const dialogsAPI = {
         })
     }
 }
+let data = new Date();
+export const newsAPI = {
+    getNews: () => {
+        return Axios.get(`http://newsapi.org/v2/everything?q=bitcoin&from=${data}&sortBy=publishedAt&apiKey=9f78a09b840c48259f1d69604ecf42f1`).then(response => {
+            return response.data;
+        })
+    }
+}
 
 
