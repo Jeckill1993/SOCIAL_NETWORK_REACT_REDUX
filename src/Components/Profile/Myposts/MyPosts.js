@@ -22,12 +22,11 @@ const MyPostsForm = (props) => {
 const MyPostsFormRedux = reduxForm({form: "newPostText"})(MyPostsForm);
 
 const MyPosts = React.memo(({posts, addPost, profile, theme}) => {
-
     let addPostText = (value) => {
         addPost(value.newPost);
     }
     let postsElements = posts.map((post) => {
-        return <Post name={post.name} key={post.id} message={post.message} photo={profile.photos.large} theme={theme}/>
+        return <Post name={post.name} key={post.id} id={post.id} message={post.message} photo={profile.photos.large} theme={theme}/>
     })
 
     return (

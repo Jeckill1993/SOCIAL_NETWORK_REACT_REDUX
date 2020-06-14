@@ -24,3 +24,7 @@ export const Input = (props) => {
     const { input, meta, child, ...restProps } = props
     return <FormControl {...props}><input type='text' className={`${theme}_inputs_textarea`} {...input} {...restProps}/></FormControl>
 }
+export const InputPassword = (props) => {
+    const { input, meta, child, ...restProps } = props
+    return <FormControl {...props}><input type='password' className={`${theme}_inputs_textarea`} {...input} {...restProps}/></FormControl>
+}

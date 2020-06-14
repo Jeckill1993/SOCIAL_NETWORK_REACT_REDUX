@@ -51,7 +51,7 @@ class App extends Component {
                                 <Switch>
                                     <Route path="/profile/:userId?" render={() => <ProfileContainer/>}/>
                                     <Route path="/dialogs/:userId?" render={() => <Dialogs/>}/>
-                                    <Route path="/news" render={() => <News news={this.props.news}/>}/>
+                                    <Route path="/news" render={() => <News news={this.props.news} theme={this.props.theme}/>}/>
                                     <Route path="/music" render={() => <Music/>}/>
                                     <Route path="/setting" render={() => <Setting/>}/>
                                     <Route path="/users" render={() => <UsersContainer/>}/>

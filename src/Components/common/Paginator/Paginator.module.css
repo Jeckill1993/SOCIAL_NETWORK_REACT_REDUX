@@ -34,3 +34,9 @@
     height: 20px;
     margin-top: 5px;
 }
+.selected {
+    background-color: #261010;
+    border-color: #261010;
+    color: #BFBABA;
+    font-weight: bold;
+}

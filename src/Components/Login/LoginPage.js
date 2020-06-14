@@ -5,6 +5,7 @@ import {Field} from 'redux-form';
 import {required} from '../../tools/validators/validators.js';
 import {maxLengthCreator} from '../../tools/validators/validators.js';
 import {Input} from '../common/FormsControls/FormsControls.js';
+import {InputPassword} from "../common/FormsControls/FormsControls";
 import {Redirect} from 'react-router-dom';
 import stylesError from '../common/FormsControls/FormsControls.module.css';
 import styles from './LoginStyles.module.css';
@@ -20,7 +21,7 @@ const LoginForm = ({handleSubmit, error, ...props}) => {
                 <Field className={styles.inputField} placeholder="Email" name="email" component={Input} validate={[required, maxLength]}/>
             </div>
             <div>
-                <Field className={styles.inputField} placeholder="Password" name="password" component={Input} validate={[required, maxLength]}/>
+                <Field className={styles.inputField} placeholder="Password" name="password" component={InputPassword} validate={[required, maxLength]}/>
             </div>
             <div>
                 <Field type="checkbox" name="rememberMe" component="input"/>Remember me

@@ -1,10 +1,10 @@
 import React from 'react';
+import NewItem from "./NewItem";
 //import classes from './News.module.css';
 
-const News = ({news}) => {
-    debugger;
+const News = ({news, theme}) => {
     let newsItems = news.map(item => {
-        return <div>{item.author}</div>
+        return <NewItem item={item} theme={theme}/>
     })
     return (
         <div>
