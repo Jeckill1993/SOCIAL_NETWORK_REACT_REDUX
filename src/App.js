@@ -4,7 +4,7 @@ import './global_colors.css';
 import {connect} from 'react-redux';
 import {BrowserRouter, Redirect, Route, Switch, withRouter} from 'react-router-dom';
 import {compose} from 'redux';
-import {initialize, changeThemeAC} from './redux/app_reducer.js';
+import {initialize, changeThemeAC} from './redux/app_reducer';
 import Preloader from './Components/common/Preloader/Preloader.js';
 import HeaderContainer from './Components/Header/HeaderContainer.js';
 import Navbar from './Components/Navbar/Navbar.js';
@@ -17,7 +17,7 @@ const Dialogs = React.lazy(() => import('./Components/Dialogs/Dialogs.js'));
 const News = React.lazy(() => import('./Components/News/News.js'));
 const Music = React.lazy(() => import('./Components/Music/Music.js'));
 const Setting = React.lazy(() => import ('./Components/Setting/Setting.js'));
-const UsersContainer = React.lazy(() => import('./Components/Users/UsersContainer.js'));
+const UsersContainer = React.lazy(() => import('./Components/Users/UsersContainer'));
 const LoginPageContainer = React.lazy(() => import('./Components/Login/LoginPageContainer.js'));
 
 

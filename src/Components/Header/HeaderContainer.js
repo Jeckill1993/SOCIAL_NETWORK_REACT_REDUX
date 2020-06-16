@@ -1,6 +1,6 @@
 import Header from './Header.js';
 import { connect } from 'react-redux';
-import { logOutThunkCreator } from '../../redux/auth_reducer.js';
+import { logOutThunkCreator } from '../../redux/auth_reducer';
 
 
 const mapStateToProps = (state) => ({

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { setMyLoginDataThunkCreator } from '../../redux/auth_reducer.js';
+import { setMyLoginDataThunkCreator } from '../../redux/auth_reducer';
 import LoginPage from './LoginPage.js';
 
 let mapStateTpProps = (state) => {

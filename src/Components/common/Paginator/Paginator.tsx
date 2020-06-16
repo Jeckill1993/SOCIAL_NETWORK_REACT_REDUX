@@ -2,9 +2,18 @@ import React, {useState} from 'react';
 import '../../../global_colors.css';
 import classes from './Paginator.module.css';
 
-const Paginator = ({totalUsersCount, pageSize, onPageChanged, currentPage, portionSize, theme}) => {
+type PropsType = {
+    totalUsersCount: number
+    pageSize: number
+    onPageChanged: (page: number | undefined) => void
+    currentPage: number
+    portionSize: number
+    theme: string
+}
+
+const Paginator: React.FC<PropsType> = ({totalUsersCount, pageSize, onPageChanged, currentPage, portionSize, theme}) => {
     let pagesCount = Math.ceil(totalUsersCount / pageSize);
-    let pages = [];
+    let pages: Array<number> = [];
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i);
     }
@@ -15,8 +24,9 @@ const Paginator = ({totalUsersCount, pageSize, onPageChanged, currentPage, porti
     let rightPortionPageNumber = portionNumber * portionSize;
 
     let [searchPageNumber, setSearchPageNumber] = useState();
-    const search = (e) => {
+    const search = (e: any) => {
         let value = e.currentTarget.value;
+        // @ts-ignore
         setSearchPageNumber(+value);
     }
 

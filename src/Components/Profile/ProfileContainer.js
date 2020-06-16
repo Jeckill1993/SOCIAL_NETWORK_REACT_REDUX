@@ -2,12 +2,12 @@ import React from 'react';
 import Profile from './Profile.js';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
-import {getProfileThunkCreator} from '../../redux/profile_reducer.js';
+import {getProfileThunkCreator} from '../../redux/profile_reducer';
 import {withAuthRedirect} from '../../hoc/withAuthRedirect.js';
 import {compose} from 'redux';
-import {getStatus} from '../../redux/profile_reducer.js';
-import {updateStatus} from '../../redux/profile_reducer.js';
-import {savePhotoSuccess} from '../../redux/profile_reducer.js';
+import {getStatus} from '../../redux/profile_reducer';
+import {updateStatus} from '../../redux/profile_reducer';
+import {savePhotoSuccess} from '../../redux/profile_reducer';
 import {setMyPersonalInfo} from "../../redux/profile_reducer";
 
 

@@ -1,8 +1,12 @@
 import {newsAPI} from '../API/api';
 
-const GET_NEWS = 'social-network/news/GET-NEWS';
+const GET_NEWS: string = 'social-network/news/GET-NEWS';
 
-export const getNewsSuccess = (news) => {
+type GetNewsActionType = {
+    type: typeof GET_NEWS
+    news: Array<object>
+}
+export const getNewsSuccess = (news: Array<object>): GetNewsActionType => {
     return {
         type: GET_NEWS,
         news,
@@ -10,7 +14,7 @@ export const getNewsSuccess = (news) => {
 }
 
 export const getNews = () => {
-    return async (dispatch) => {
+    return async (dispatch: any) => {
         let response = await newsAPI.getNews();
         if (response.status === 'ok') {
             dispatch(getNewsSuccess(response.articles))
@@ -18,10 +22,14 @@ export const getNews = () => {
     }
 }
 
+type InitialStateType = {
+    news: Array<object>
+}
 const initialState = {
     news: [],
 }
-const newsReducer = (state = initialState, action) => {
+
+const newsReducer = (state: InitialStateType = initialState, action: any): InitialStateType => {
     switch (action.type) {
         case GET_NEWS:
             return {
