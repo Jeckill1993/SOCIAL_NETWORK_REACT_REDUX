@@ -1,4 +1,4 @@
-import Header from './Header.js';
+import Header from './Header';
 import { connect } from 'react-redux';
 import { logOutThunkCreator } from '../../redux/auth_reducer';
 

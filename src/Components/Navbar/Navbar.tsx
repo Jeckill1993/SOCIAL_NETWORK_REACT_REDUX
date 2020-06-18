@@ -3,8 +3,12 @@ import '../../global_colors.css';
 import classes from './Navbar.module.css';
 import {NavLink} from 'react-router-dom';
 
+type PropsType = {
+    newMessagesCount: number
+    theme: string
+}
 
-const Navbar = ({newMessagesCount, theme}) => {
+const Navbar: React.FC<PropsType> = ({newMessagesCount, theme}) => {
     return (
         <nav className={`${classes.nav} ${theme}_backgroundColor_nav`}>
             <div className={`${classes.item} ${theme}_nav_links`}><NavLink to="/profile" activeClassName={`active`}>Profile</NavLink>
@@ -19,7 +23,7 @@ const Navbar = ({newMessagesCount, theme}) => {
             <div className={`${classes.item} ${theme}_nav_links`}><NavLink to="/users" activeClassName={`active`}>Users</NavLink></div>
         </nav>
     )
-
 }
 
+// @ts-ignore
 export default Navbar;

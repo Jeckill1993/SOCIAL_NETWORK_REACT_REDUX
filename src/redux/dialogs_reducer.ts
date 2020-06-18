@@ -5,11 +5,24 @@ const SET_DIALOG = 'social-network/dialogs/SET-DIALOG';
 const GET_MESSAGES = 'social-network/dialogs/GET-MESSAGES';
 const GET_NEW_MESSAGES = 'social-network/dialogs/GET-NEW-MESSAGES';
 
+export type PhotoType = {
+    large: string
+    small: string
+}
+export type DialogType = {
+    userName: string
+    id: number
+    photos: PhotoType
+}
+export type MessageType = {
+    id: number
+    body: string
+}
 
 //action creator
 type GetDialogsActionType = {
     type: typeof GET_DIALOGS
-    dialogs: Array<object>
+    dialogs: Array<DialogType>
 }
 type SetDialogActionType = {
     type: typeof SET_DIALOG
@@ -17,14 +30,14 @@ type SetDialogActionType = {
 }
 type GetMessagesActionType = {
     type: typeof GET_MESSAGES
-    messages: Array<object>
+    messages: Array<MessageType>
 }
 type GetNewMessagesActionType = {
     type: typeof GET_NEW_MESSAGES
     newMessagesCount: number
 }
 
-export const getDialogsActionCreator = (dialogs: Array<object>): GetDialogsActionType => {
+export const getDialogsActionCreator = (dialogs: Array<DialogType>): GetDialogsActionType => {
     return {
         type: GET_DIALOGS,
         dialogs,
@@ -36,7 +49,7 @@ export const setDialog = (dialog: object): SetDialogActionType => {
         dialog,
     }
 }
-export const getMessagesActionCreator = (messages: Array<object>): GetMessagesActionType => {
+export const getMessagesActionCreator = (messages: Array<MessageType>): GetMessagesActionType => {
     return {
         type: GET_MESSAGES,
         messages,
@@ -89,7 +102,7 @@ export const getNewMessages = () => {
 }
 
 type InitialStateType = {
-    dialogs: Array<object>
+    dialogs: Array<DialogType>
     messages: Array<object>,
     newMessagesCount: number,
     currentDialog: object

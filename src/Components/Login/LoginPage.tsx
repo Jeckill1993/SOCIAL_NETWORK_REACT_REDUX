@@ -13,7 +13,7 @@ import styles from './LoginStyles.module.css';
 
 let maxLength = maxLengthCreator(30);
 
-
+// @ts-ignore
 const LoginForm = ({handleSubmit, error, ...props}) => {
     return (
         <form onSubmit={handleSubmit}>
@@ -36,18 +36,28 @@ const LoginForm = ({handleSubmit, error, ...props}) => {
 
 const LoginReduxForm = reduxForm({form: 'login'})(LoginForm);
 
-const LoginPage = ({setMyLoginData, isAuth, userId, theme}) => {
+type PropsType = {
+    setMyLoginData: () => void
+    isAuth: boolean
+    userId: number
+    theme: string
+}
+
+const LoginPage: React.FC<PropsType> = ({setMyLoginData, isAuth, userId, theme}) => {
+    // @ts-ignore
     const onSubmit = (formData) => {
+        // @ts-ignore
         setMyLoginData(formData);
     }
     if (isAuth) {
         return <Redirect to={"/profile"}/>
     }
-
     return (
         <div className={styles.loginForm}>
             <h2>Sign In</h2>
-            <LoginReduxForm onSubmit={onSubmit} theme={theme}/>
+            <LoginReduxForm onSubmit={onSubmit}
+            // @ts-ignore
+            theme={theme}/>
             <h3>{userId}</h3>
         </div>
     )

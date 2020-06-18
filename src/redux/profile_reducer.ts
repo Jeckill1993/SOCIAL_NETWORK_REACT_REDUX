@@ -8,7 +8,7 @@ const SET_STATUS = 'social-network/profile/SET-STATUS';
 const SAVE_PHOTO = 'social-network/profile/SAVE-PHOTO';
 
 
-type PostType = {
+export type PostType = {
     id: number
     name: string
     message: string
@@ -27,7 +27,7 @@ export type PhotosType = {
     small: string | null
     large: string | null
 }
-type ProfileType = {
+export type ProfileType = {
     userId: number
     lookingForAJob: boolean
     lookingForAJobDescription: string
@@ -49,7 +49,7 @@ type SetStatusActionType = {
     type: typeof SET_STATUS,
     status: string | null
 }
-type SavePhotoActionType = {
+export type SavePhotoActionType = {
     type: typeof SAVE_PHOTO
     photo: object
 }

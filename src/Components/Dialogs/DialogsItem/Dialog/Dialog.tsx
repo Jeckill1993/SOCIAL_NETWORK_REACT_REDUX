@@ -3,7 +3,15 @@ import '../../../../global_colors.css';
 import classes from '../../Dialogs.module.css';
 import { NavLink } from 'react-router-dom';
 
-const Dialog = ({id, userName, photos, getMessages, theme}) => {
+type PropsType = {
+    id: number
+    userName: string
+    photos: string | undefined
+    getMessages: (id: number) => void
+    theme: string
+}
+
+const Dialog: React.FC<PropsType> = ({id, userName, photos, getMessages, theme}) => {
     let onGetMessages = () => {
         getMessages(id);
     }

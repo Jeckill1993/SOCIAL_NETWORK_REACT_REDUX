@@ -6,7 +6,7 @@ import {toogleFollowingProgress} from '../../redux/users_reducer';
 import {getUsersThunkCreator} from '../../redux/users_reducer';
 import {connect} from 'react-redux';
 import Users from './Users';
-import Preloader from './../common/Preloader/Preloader';
+import Preloader from '../common/Preloader/Preloader';
 import {withAuthRedirect} from '../../hoc/withAuthRedirect'
 import {compose} from 'redux';
 import {getUsersSelector} from '../../redux/users_selectors';
@@ -29,7 +29,6 @@ type MapStatePropsType = {
     theme: string
 }
 type MapDispatchPropsType = {
-    onPageChanged: (page: number | undefined) => void
     setCurrentPage: (page: number | undefined) => void
     getUsers: (currentPage: number |undefined, pageSize: number) => void
     toogleFollowingProgress: (isFetching: boolean, userId: number) => void
@@ -85,7 +84,8 @@ let mapStateToProps = (state: AppStateType): MapStatePropsType => {
 
 
 export default compose(
-    connect(mapStateToProps, {
+    // @ts-ignore
+    connect<MapDispatchPropsType, MapDispatchPropsType, AppStateType>(mapStateToProps, {
         setCurrentPage,
         toogleFollowingProgress,
         getUsers: getUsersThunkCreator,

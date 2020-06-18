@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-const Setting = (props) => {
+const Setting = () => {
     return (
         <div>Setting</div>
     )

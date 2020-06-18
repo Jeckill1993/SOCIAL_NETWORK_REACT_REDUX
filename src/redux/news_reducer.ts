@@ -2,6 +2,15 @@ import {newsAPI} from '../API/api';
 
 const GET_NEWS: string = 'social-network/news/GET-NEWS';
 
+export type NewType = {
+    title: string
+    author: string
+    publishedAt: string
+    urlToImage: string
+    content: string
+    url: string
+}
+
 type GetNewsActionType = {
     type: typeof GET_NEWS
     news: Array<object>
@@ -23,7 +32,7 @@ export const getNews = () => {
 }
 
 type InitialStateType = {
-    news: Array<object>
+    news: Array<NewType>
 }
 const initialState = {
     news: [],

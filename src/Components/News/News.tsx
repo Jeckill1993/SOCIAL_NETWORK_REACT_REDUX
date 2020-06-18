@@ -1,8 +1,14 @@
 import React from 'react';
 import NewItem from "./NewItem";
+import {NewType} from "../../redux/news_reducer";
 //import classes from './News.module.css';
 
-const News = ({news, theme}) => {
+type PropsType = {
+    news: Array<NewType>
+    theme: string
+}
+
+const News: React.FC<PropsType> = ({news, theme}) => {
     let newsItems = news.map(item => {
         return <NewItem item={item} theme={theme}/>
     })
