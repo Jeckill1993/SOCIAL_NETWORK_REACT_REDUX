@@ -1,4 +1,6 @@
-import {dialogsAPI} from "../API/api";
+import {dialogsAPI, ResultCodeEnum} from "../API/api";
+import {ThunkAction} from "redux-thunk";
+import {AppStateType} from "./redux_store";
 
 const GET_DIALOGS = 'social-network/dialogs/GET-DIALOGS';
 const SET_DIALOG = 'social-network/dialogs/SET-DIALOG';
@@ -10,13 +12,23 @@ export type PhotoType = {
     small: string
 }
 export type DialogType = {
-    userName: string
     id: number
+    userName: string
+    hasNewMessages: false
+    lastDialogActivityDate: string
+    lastUserActivityDate: string
+    newMessagesCount: number
     photos: PhotoType
 }
 export type MessageType = {
-    id: number
+    addedAt: string
     body: string
+    id: number
+    recipientId: number
+    senderId: number
+    senderName: string
+    translatedBody: string | null
+    viewed: boolean
 }
 
 //action creator
@@ -36,6 +48,9 @@ type GetNewMessagesActionType = {
     type: typeof GET_NEW_MESSAGES
     newMessagesCount: number
 }
+
+type ActionTypes = GetDialogsActionType | SetDialogActionType | GetMessagesActionType | GetNewMessagesActionType
+type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionTypes>
 
 export const getDialogsActionCreator = (dialogs: Array<DialogType>): GetDialogsActionType => {
     return {
@@ -63,39 +78,39 @@ export const getNewMessagesActionCreator = (newMessagesCount: number): GetNewMes
 }
 
 //thunk creator
-export const getDialogs = () => {
-    return async (dispatch: any) => {
-        let response = await dialogsAPI.getDialogs();
-            dispatch(getDialogsActionCreator(response));
+export const getDialogs = (): ThunkType => {
+    return async (dispatch) => {
+        let dialogsData = await dialogsAPI.getDialogs();
+            dispatch(getDialogsActionCreator(dialogsData));
     }
 }
-export const startDialog = (userId: number) => {
-    return async (dispatch: any) => {
-        let response = await dialogsAPI.startDialog(userId);
-        if(response.resultCode === 0) {
-            dispatch(setDialog(response.data));
+export const startDialog = (userId: number): ThunkType => {
+    return async (dispatch) => {
+        let startDialogData = await dialogsAPI.startDialog(userId);
+        if(startDialogData.resultCode === ResultCodeEnum.Success) {
+            dispatch(setDialog(startDialogData.data));
         }
     }
 }
-export const setMessagesView = (messageId: number) => {
-    return async (dispatch: any) => {
+export const setMessagesView = (messageId: number): ThunkType => {
+    return async (dispatch) => {
         let response = await dialogsAPI.getMessageView(messageId);
     }
 }
-export const getMessages = (userId: number) => {
-    return async (dispatch: any) => {
-        let response = await dialogsAPI.getFriendMessages(userId);
-        dispatch(getMessagesActionCreator(response.items));
+export const getMessages = (userId: number): ThunkType => {
+    return async (dispatch) => {
+        let messagesData = await dialogsAPI.getFriendMessages(userId);
+        dispatch(getMessagesActionCreator(messagesData.items));
     }
 }
-export const sendMessage = ({userId, body}:any) => {
-    return async (dispatch: any) => {
+export const sendMessage = ({userId, body}:any): ThunkType => {
+    return async (dispatch) => {
         let response = await dialogsAPI.sendMessage({userId, body});
         dispatch(getMessages(userId));
     }
 }
-export const getNewMessages = () => {
-    return async (dispatch: any) => {
+export const getNewMessages = (): ThunkType => {
+    return async (dispatch) => {
         let response = await dialogsAPI.getNewMessages();
         dispatch(getNewMessagesActionCreator(response));
     }
@@ -103,7 +118,7 @@ export const getNewMessages = () => {
 
 type InitialStateType = {
     dialogs: Array<DialogType>
-    messages: Array<object>,
+    messages: Array<MessageType>,
     newMessagesCount: number,
     currentDialog: object
 }
@@ -114,7 +129,7 @@ let initialState = {
     currentDialog: {}
 }
 
-const dialogsReducer = (state: InitialStateType = initialState, action: any): InitialStateType => {
+const dialogsReducer = (state: InitialStateType = initialState, action: ActionTypes): InitialStateType => {
 
     switch (action.type) {
         case GET_DIALOGS:

@@ -12,13 +12,13 @@ import {getNewMessages} from "./redux/dialogs_reducer";
 import Footer from "./Components/Footer/Footer";
 import {getNews} from "./redux/news_reducer";
 
-const ProfileContainer = React.lazy(() => import('./Components/Profile/ProfileContainer.js'));
+const ProfileContainer = React.lazy(() => import('./Components/Profile/ProfileContainer'));
 const Dialogs = React.lazy(() => import('./Components/Dialogs/Dialogs'));
 const News = React.lazy(() => import('./Components/News/News'));
 const Music = React.lazy(() => import('./Components/Music/Music'));
 const Setting = React.lazy(() => import ('./Components/Setting/Setting'));
 const UsersContainer = React.lazy(() => import('./Components/Users/UsersContainer'));
-const LoginPageContainer = React.lazy(() => import('./Components/Login/LoginPageContainer.js'));
+const LoginPageContainer = React.lazy(() => import('./Components/Login/LoginPageContainer'));
 
 
 class App extends Component {

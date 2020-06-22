@@ -1,10 +1,10 @@
 import React from 'react';
 import '../../global_colors.css';
-import {reduxForm} from 'redux-form';
+import {InjectedFormProps, reduxForm} from 'redux-form';
 import {Field} from 'redux-form';
-import {required} from '../../tools/validators/validators.js';
-import {maxLengthCreator} from '../../tools/validators/validators.js';
-import {Input} from '../common/FormsControls/FormsControls.js';
+import {required} from '../../tools/validators/validators';
+import {maxLengthCreator} from '../../tools/validators/validators';
+import {Input} from '../common/FormsControls/FormsControls';
 import {InputPassword} from "../common/FormsControls/FormsControls";
 import {Redirect} from 'react-router-dom';
 import stylesError from '../common/FormsControls/FormsControls.module.css';
@@ -13,8 +13,11 @@ import styles from './LoginStyles.module.css';
 
 let maxLength = maxLengthCreator(30);
 
-// @ts-ignore
-const LoginForm = ({handleSubmit, error, ...props}) => {
+type OwnProps = {
+    theme: string
+}
+
+const LoginForm: React.FC<InjectedFormProps<FormDataType, OwnProps> & OwnProps> = ({handleSubmit, error, ...props}) => {
     return (
         <form onSubmit={handleSubmit}>
             <div>
@@ -34,19 +37,23 @@ const LoginForm = ({handleSubmit, error, ...props}) => {
     )
 }
 
-const LoginReduxForm = reduxForm({form: 'login'})(LoginForm);
+const LoginReduxForm = reduxForm<FormDataType, OwnProps>({form: 'login'})(LoginForm);
 
 type PropsType = {
-    setMyLoginData: () => void
+    setMyLoginData: (formData: FormDataType) => void
     isAuth: boolean
     userId: number
     theme: string
 }
+type FormDataType = {
+    email: string
+    password: string
+    rememberMe: boolean
+    captcha: string | null
+}
 
 const LoginPage: React.FC<PropsType> = ({setMyLoginData, isAuth, userId, theme}) => {
-    // @ts-ignore
-    const onSubmit = (formData) => {
-        // @ts-ignore
+    const onSubmit = (formData: FormDataType) => {
         setMyLoginData(formData);
     }
     if (isAuth) {
@@ -56,7 +63,6 @@ const LoginPage: React.FC<PropsType> = ({setMyLoginData, isAuth, userId, theme})
         <div className={styles.loginForm}>
             <h2>Sign In</h2>
             <LoginReduxForm onSubmit={onSubmit}
-            // @ts-ignore
             theme={theme}/>
             <h3>{userId}</h3>
         </div>

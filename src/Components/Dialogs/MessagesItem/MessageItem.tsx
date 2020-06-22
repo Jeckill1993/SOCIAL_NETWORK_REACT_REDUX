@@ -3,9 +3,9 @@ import '../../../global_colors.css';
 import Message from './Message/Message';
 import {reduxForm} from 'redux-form';
 import {Field} from 'redux-form';
-import {Textarea} from '../../common/FormsControls/FormsControls.js';
-import {required} from '../../../tools/validators/validators.js';
-import {maxLengthCreator} from '../../../tools/validators/validators.js';
+import {Textarea} from '../../common/FormsControls/FormsControls';
+import {required} from '../../../tools/validators/validators';
+import {maxLengthCreator} from '../../../tools/validators/validators';
 import classes from '../Dialogs.module.css'
 import {MessageType} from "../../../redux/dialogs_reducer";
 

@@ -3,9 +3,9 @@ import '../../../global_colors.css';
 import {reduxForm} from 'redux-form';
 import {Field} from 'redux-form';
 import Post from './Post/Post';
-import {required} from '../../../tools/validators/validators.js';
-import {maxLengthCreator} from '../../../tools/validators/validators.js';
-import {Textarea} from '../../common/FormsControls/FormsControls.js';
+import {required} from '../../../tools/validators/validators';
+import {maxLengthCreator} from '../../../tools/validators/validators';
+import {Textarea} from '../../common/FormsControls/FormsControls';
 import classes from './Myposts.module.css';
 import {PostType, ProfileType} from "../../../redux/profile_reducer";
 

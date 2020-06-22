@@ -1,4 +1,6 @@
-import { getAuthDataThunkCreator } from './auth_reducer';
+import {getAuthDataThunkCreator, setAuthUserDataActionType} from './auth_reducer';
+import {ThunkAction} from "redux-thunk";
+import {AppStateType} from "./redux_store";
 
 const SET_INITIALIZED: string = 'social-network/app/SET-INITIALIZED';
 const CHANGE_THEME: string = 'social-network/app/CHANGE_THEME';
@@ -7,16 +9,19 @@ const CHANGE_THEME: string = 'social-network/app/CHANGE_THEME';
 type InitializedActionType = {
     type: typeof SET_INITIALIZED
 }
+type ChangeThemeActionType = {
+    type: typeof CHANGE_THEME
+    theme: string
+}
+
+type ActionTypes = InitializedActionType | ChangeThemeActionType | setAuthUserDataActionType
+
+type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionTypes>
 
 export const setInitialized = (): InitializedActionType => {
     return {
         type: SET_INITIALIZED,
     }
-}
-
-type ChangeThemeActionType = {
-    type: typeof CHANGE_THEME
-    theme: string
 }
 export const changeThemeAC = (theme: string): ChangeThemeActionType => {
     return {
@@ -45,7 +50,7 @@ let initialState = {
 }
 
 //тип возвращаемого значения пишется перед стрелкой (если функция стрелочная)
-const appReducer = (state: InitialStateType = initialState, action: any): InitialStateType => {
+const appReducer = (state: InitialStateType = initialState, action: ActionTypes): InitialStateType => {
     switch (action.type) {
         case SET_INITIALIZED:
             return {
@@ -55,6 +60,7 @@ const appReducer = (state: InitialStateType = initialState, action: any): Initia
         case CHANGE_THEME:
             return {
                 ...state,
+                // @ts-ignore
                 theme: action.theme,
             }
         default:

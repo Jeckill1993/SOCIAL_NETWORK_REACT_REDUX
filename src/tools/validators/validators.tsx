@@ -1,5 +1,5 @@
-
-export const required = (value) => {
+type FieldValidationType = (value: string) => string | undefined
+export const required: FieldValidationType = (value) => {
     if (value) {
         return undefined; 
     } else {
@@ -7,7 +7,7 @@ export const required = (value) => {
     }
 }
 
-export const maxLengthCreator = (maxLength) => (value) => {
+export const maxLengthCreator = (maxLength: number): FieldValidationType => (value) => {
     if (value && value.length > maxLength) {
         return 'Max length is 30 symbols';
     } else {
