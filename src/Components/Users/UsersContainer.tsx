@@ -1,5 +1,5 @@
 import React from 'react';
-import {actions, UserType} from '../../redux/users_reducer';
+import {usersActions, UserType} from '../../redux/users_reducer';
 import {followUserThunkCreator} from '../../redux/users_reducer';
 import {unfollowUserThunkCreator} from '../../redux/users_reducer';
 import {getUsersThunkCreator} from '../../redux/users_reducer';
@@ -85,8 +85,8 @@ let mapStateToProps = (state: AppStateType): MapStatePropsType => {
 export default compose(
     // @ts-ignore
     connect<MapStatePropsType, MapDispatchPropsType, AppStateType>(mapStateToProps, {
-        setCurrentPage: actions.setCurrentPage,
-        toogleFollowingProgress: actions.toogleFollowingProgress,
+        setCurrentPage: usersActions.setCurrentPage,
+        toogleFollowingProgress: usersActions.toogleFollowingProgress,
         getUsers: getUsersThunkCreator,
         follow: followUserThunkCreator,
         unfollow: unfollowUserThunkCreator

@@ -1,4 +1,4 @@
-import {usersAPI} from '../API/api';
+import {ResultCodeEnum, usersAPI} from '../API/api';
 import {updateObjectInArray} from '../tools/object-helpers.js';
 import {PhotosType} from './profile_reducer';
 import {ThunkAction} from "redux-thunk";
@@ -14,12 +14,11 @@ export type UserType = {
     "followed": boolean
 }
 
-//action creator, return action
-type ActionTypes = InferActionTypes<typeof actions>
+type ActionTypes = InferActionTypes<typeof usersActions>
 type DispatchType = Dispatch<ActionTypes>
 type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionTypes>
 
-export const actions = {
+export const usersActions = {
     followUser: (userId: number) => ({
         type: 'social-network/users/FOLLOW',
         userId,
@@ -54,36 +53,36 @@ export const actions = {
 //thunk creator, side effect
 export const getUsersThunkCreator = (currentPage: number | undefined, pageSize: number): ThunkType => {
     return async (dispatch) => {
-        dispatch(actions.toogleIsFetching(true));
+        dispatch(usersActions.toogleIsFetching(true));
         let usersData = await usersAPI.getUsers(currentPage, pageSize);
-        dispatch(actions.toogleIsFetching(false));
-        dispatch(actions.setUsers(usersData.items));
-        dispatch(actions.setTotalUserCount(usersData.totalCount));
+        dispatch(usersActions.toogleIsFetching(false));
+        dispatch(usersActions.setUsers(usersData.items));
+        dispatch(usersActions.setTotalUserCount(usersData.totalCount));
     }
 }
 export const followUserThunkCreator = (userId: number): ThunkType => {
     return async (dispatch) => {
         let apiMethod = usersAPI.makeFollow.bind(userId);
-        let actionCreator = actions.followUser;
+        let actionCreator = usersActions.followUser;
         followUnfollowFlow(dispatch, userId, apiMethod, actionCreator);
     }
 }
 export const unfollowUserThunkCreator = (userId: number): ThunkType => {
     return async (dispatch) => {
         let apiMethod = usersAPI.deleteFollow.bind(userId);
-        let actionCreator = actions.unfollowUser;
+        let actionCreator = usersActions.unfollowUser;
         followUnfollowFlow(dispatch, userId, apiMethod, actionCreator);
     }
 }
 
 //function
 const followUnfollowFlow = async (dispatch: DispatchType, userId: number, apiMethod: any, actionCreator: (userId: number) => ActionTypes) => {
-    dispatch(actions.toogleFollowingProgress(true, userId));
+    dispatch(usersActions.toogleFollowingProgress(true, userId));
     let data = await apiMethod(userId);
-    if (data.resultCode === 0) {
+    if (data.resultCode === ResultCodeEnum.Success) {
         dispatch(actionCreator(userId));
     }
-    dispatch(actions.toogleFollowingProgress(false, userId));
+    dispatch(usersActions.toogleFollowingProgress(false, userId));
 }
 
 type InitialStateType = {
