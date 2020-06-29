@@ -1,6 +1,7 @@
-import {dialogsAPI, ResultCodeEnum} from "../API/api";
+import {ResultCodeEnum} from "../API/api";
 import {ThunkAction} from "redux-thunk";
 import {AppStateType, InferActionTypes} from "./redux_store";
+import {dialogsAPI} from "../API/dialogs-api";
 
 
 export type PhotoType = {

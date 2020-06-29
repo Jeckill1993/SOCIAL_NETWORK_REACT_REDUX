@@ -1,8 +1,11 @@
-import {authAPI, ResultCodeEnum} from '../API/api';
+import {authAPI} from '../API/auth-api';
 import {ThunkAction} from "redux-thunk";
 import {AppStateType} from "./redux_store";
-import {stopSubmit} from "redux-form"; //this is action creator, was created redux-form developers
+import {stopSubmit} from "redux-form";
+import {ResultCodeEnum} from "../API/api";
 
+
+//this is action creator, was created redux-form developers
 const SET_USER_DATA: string = 'social-network/auth/SET-USER-DATA';
 
 //action creator
@@ -17,7 +20,7 @@ export type setAuthUserDataActionType = {
     payload: setAuthUserDataActionPayloadType
 }
 
-type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, setAuthUserDataActionType>
+type ThunkType = ThunkAction<Promise<number | undefined| void>, AppStateType, unknown, setAuthUserDataActionType>
 
 export const setAuthUserData = (userId: number | null, login: string | null, email: string | null, isAuth: boolean): setAuthUserDataActionType => ({
     type: SET_USER_DATA,
@@ -32,8 +35,7 @@ type AuthFormDataType = {
     captcha: string | null
 }
 export const getAuthDataThunkCreator = (): ThunkType => {
-    // @ts-ignore
-    return async (dispatch) => {
+    return async (dispatch: any) => {
         let authData = await authAPI.me();
         if (authData.resultCode === ResultCodeEnum.Success) {
             let { id, login, email } = authData.data;

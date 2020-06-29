@@ -1,17 +1,17 @@
-import {ResultCodeEnum, usersAPI} from '../API/api';
-import {updateObjectInArray} from '../tools/object-helpers.js';
+import {ResultCodeEnum} from '../API/api';
+import {updateObjectInArray} from '../tools/object-helpers';
 import {PhotosType} from './profile_reducer';
 import {ThunkAction} from "redux-thunk";
 import {AppStateType, InferActionTypes} from "./redux_store";
 import {Dispatch} from "redux";
-
+import {MakeFollowDeleteFollowType, usersAPI} from "../API/users-api";
 
 export type UserType = {
     name: string
     id: number
-    photos: PhotosType | null
+    photos: PhotosType
     status: string | null,
-    "followed": boolean
+    followed: boolean
 }
 
 type ActionTypes = InferActionTypes<typeof usersActions>
@@ -76,7 +76,7 @@ export const unfollowUserThunkCreator = (userId: number): ThunkType => {
 }
 
 //function
-const followUnfollowFlow = async (dispatch: DispatchType, userId: number, apiMethod: any, actionCreator: (userId: number) => ActionTypes) => {
+const followUnfollowFlow = async (dispatch: DispatchType, userId: number, apiMethod: (userId: number) => Promise<MakeFollowDeleteFollowType>, actionCreator: (userId: number) => ActionTypes) => {
     dispatch(usersActions.toogleFollowingProgress(true, userId));
     let data = await apiMethod(userId);
     if (data.resultCode === ResultCodeEnum.Success) {

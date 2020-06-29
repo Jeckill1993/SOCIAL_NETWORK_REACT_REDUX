@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../../global_colors.css';
-import {reduxForm} from 'redux-form';
+import {InjectedFormProps, reduxForm} from 'redux-form';
 import {Field} from 'redux-form';
 import Post from './Post/Post';
 import {required} from '../../../tools/validators/validators';
@@ -11,8 +11,11 @@ import {PostType, ProfileType} from "../../../redux/profile_reducer";
 
 const maxLength = maxLengthCreator(30);
 
-// @ts-ignore
-const MyPostsForm = (props) => {
+type OwnPropsType = {
+    theme: string
+}
+
+const MyPostsForm: React.FC<InjectedFormProps<FormDataType, OwnPropsType> & OwnPropsType> = (props) => {
     return (
         <form className={classes.formAddPost} onSubmit={props.handleSubmit}>
             <Field component={Textarea} name="newPost" placeholder="Your news..." validate={[required, maxLength]}/>
@@ -21,24 +24,24 @@ const MyPostsForm = (props) => {
     )
 }
 
-const MyPostsFormRedux = reduxForm({form: "newPostText"})(MyPostsForm);
+const MyPostsFormRedux = reduxForm<FormDataType, OwnPropsType>({form: "newPostText"})(MyPostsForm);
 
 type PropsType = {
     posts: Array<PostType>
     addPost: (newPost: string) => void
-    profile: ProfileType
+    profile: ProfileType | null
     theme: string
 }
-type ValueType = {
+type FormDataType = {
     newPost: string
 }
 
 const MyPosts: React.FC<PropsType> = React.memo(({posts, addPost, profile, theme}) => {
-    let addPostText = (value: ValueType) => {
+    let addPostText = (value: FormDataType) => {
         addPost(value.newPost);
     }
     let postsElements = posts.map((post) => {
-        return <Post name={post.name} key={post.id} id={post.id} message={post.message} photo={profile.photos.large} theme={theme}/>
+        return <Post name={post.name} key={post.id} id={post.id} message={post.message} photo={profile?.photos.large} theme={theme}/>
     })
 
     return (
@@ -46,7 +49,6 @@ const MyPosts: React.FC<PropsType> = React.memo(({posts, addPost, profile, theme
             <h2>My posts</h2>
 
             <MyPostsFormRedux
-                // @ts-ignore
                 onSubmit={addPostText} theme={theme}/>
             {postsElements}
         </div>

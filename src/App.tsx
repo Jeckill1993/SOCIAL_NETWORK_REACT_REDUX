@@ -1,7 +1,7 @@
 import React, {Suspense, Component} from 'react';
 import './App.css';
 import './global_colors.css';
-import {connect} from 'react-redux';
+import {connect, ConnectedProps} from 'react-redux';
 import {BrowserRouter, Redirect, Route, Switch, withRouter} from 'react-router-dom';
 import {compose} from 'redux';
 import {initialize, changeThemeAC} from './redux/app_reducer';
@@ -11,6 +11,7 @@ import Navbar from './Components/Navbar/Navbar';
 import {getNewMessages} from "./redux/dialogs_reducer";
 import Footer from "./Components/Footer/Footer";
 import {getNews} from "./redux/news_reducer";
+import {AppStateType} from "./redux/redux_store";
 
 const ProfileContainer = React.lazy(() => import('./Components/Profile/ProfileContainer'));
 const Dialogs = React.lazy(() => import('./Components/Dialogs/Dialogs'));
@@ -21,18 +22,18 @@ const UsersContainer = React.lazy(() => import('./Components/Users/UsersContaine
 const LoginPageContainer = React.lazy(() => import('./Components/Login/LoginPageContainer'));
 
 
-class App extends Component {
-    catchAllUnhandledError = (promiseRejectionEvent) => {
-        
+class App extends Component<PropsFromRedux> {
+    catchAllUnhandledErrors = (e: PromiseRejectionEvent) => {
+        alert('Some error occurred');
     }
     componentDidMount() {
         this.props.initialize();
         this.props.getNewMessages();
         this.props.getNews();
-        window.addEventListener('unhandledrejection', this.catchAllUnhandledError);
+        window.addEventListener('unhandledrejection', this.catchAllUnhandledErrors);
     }
     componentWillUnmount() {
-        window.removeEventListener('unhandledrejection', this.catchAllUnhandledError);
+        window.removeEventListener('unhandledrejection', this.catchAllUnhandledErrors);
     }
 
     render() {
@@ -69,15 +70,19 @@ class App extends Component {
     }
 }
 
-const mapStateToProps = (state) => ({
+
+type PropsFromRedux = ConnectedProps<typeof connector>
+
+const mapStateToProps = (state: AppStateType) => ({
     initialized: state.app.initialized,
     theme: state.app.theme,
     newMessagesCount: state.dialogs.newMessagesCount,
     news: state.news.news,
 })
+let connector = connect(mapStateToProps, {initialize, getNewMessages, changeTheme: changeThemeAC, getNews})
 
 export default compose(
     withRouter,
-    connect(mapStateToProps, {initialize, getNewMessages, changeTheme: changeThemeAC, getNews})
+    connector
 )(App);
 

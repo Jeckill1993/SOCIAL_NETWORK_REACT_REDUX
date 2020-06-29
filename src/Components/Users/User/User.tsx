@@ -14,13 +14,11 @@ type PropsType = {
 }
 
 const User: React.FC<PropsType> = ({user, followingInProgress, unfollow, follow, theme}) => {
-    // @ts-ignore
     return (
         <div className={classes.userItem}>
             <div>
                 <div>
                     <NavLink to={`profile/${user.id}`}><img className={classes.userPhoto}
-                        // @ts-ignore
                                                             src={user.photos.small != null ? user.photos.small : userPhoto}
                                                             alt="avatar"/></NavLink>
                 </div>

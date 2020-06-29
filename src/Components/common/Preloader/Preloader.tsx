@@ -2,7 +2,7 @@ import React from 'react';
 import preloader from '../../../assets/images/thumb.png';
 
 
-const Preloader = (props) => {
+const Preloader = () => {
     return (
         <img src={preloader} alt={'loading'}/>
     )

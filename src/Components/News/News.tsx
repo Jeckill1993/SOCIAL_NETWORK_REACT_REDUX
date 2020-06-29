@@ -1,7 +1,6 @@
 import React from 'react';
 import NewItem from "./NewItem";
 import {NewType} from "../../redux/news_reducer";
-//import classes from './News.module.css';
 
 type PropsType = {
     news: Array<NewType>

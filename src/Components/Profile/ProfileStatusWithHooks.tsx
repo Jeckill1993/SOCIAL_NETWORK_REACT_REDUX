@@ -1,9 +1,9 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, ChangeEvent} from 'react';
 import classes from './Profile.module.css';
 
 type PropsType = {
-    status: string | null
-    updateStatus: (status: string | null) => void
+    status: string
+    updateStatus: (status: string) => void
     theme: string
 }
 
@@ -22,7 +22,7 @@ const ProfileStatusWithHooks: React.FC<PropsType> = ({status, updateStatus, them
         setEditMode(false);
         updateStatus(localStatus);
     }
-    const onStatusChange = (e: any) => {
+    const onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
         setStatus(e.currentTarget.value)
     }
 
@@ -31,7 +31,6 @@ const ProfileStatusWithHooks: React.FC<PropsType> = ({status, updateStatus, them
                 {
                     editMode ?
                         <input className={`${theme}_inputs_textarea`} type="text" onChange={onStatusChange} onBlur={deactivateEditMode} autoFocus={true}
-                            // @ts-ignore
                                value={localStatus}/>
                         :
                         <span onDoubleClick={activateEditMode}>{status || "not status"}</span>

@@ -1,11 +1,11 @@
-import React, {useState} from 'react';
+import React, {ChangeEvent, useState} from 'react';
 import '../../../global_colors.css';
 import classes from './Paginator.module.css';
 
 type PropsType = {
     totalUsersCount: number
     pageSize: number
-    onPageChanged: (page: number | undefined) => void
+    onPageChanged: (page: number) => void
     currentPage: number
     portionSize: number
     theme: string
@@ -23,10 +23,10 @@ const Paginator: React.FC<PropsType> = ({totalUsersCount, pageSize, onPageChange
     let leftPortionPageNumber = (portionNumber - 1) * portionSize + 1;
     let rightPortionPageNumber = portionNumber * portionSize;
 
-    let [searchPageNumber, setSearchPageNumber] = useState();
-    const search = (e: any) => {
+
+    let [searchPageNumber, setSearchPageNumber] = useState<number>(1);
+    const search = (e: ChangeEvent<HTMLInputElement>) => {
         let value = e.currentTarget.value;
-        // @ts-ignore
         setSearchPageNumber(+value);
     }
 

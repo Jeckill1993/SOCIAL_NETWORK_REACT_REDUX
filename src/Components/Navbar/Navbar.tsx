@@ -25,5 +25,4 @@ const Navbar: React.FC<PropsType> = ({newMessagesCount, theme}) => {
     )
 }
 
-// @ts-ignore
 export default Navbar;

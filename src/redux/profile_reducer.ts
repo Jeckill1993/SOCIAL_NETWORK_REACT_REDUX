@@ -1,6 +1,7 @@
-import {profileAPI, ResultCodeEnum} from '../API/api';
+import {ResultCodeEnum} from '../API/api';
 import store, {AppStateType, InferActionTypes} from './redux_store';
 import {ThunkAction} from "redux-thunk";
+import {profileAPI} from "../API/profile-api";
 
 
 export type PostType = {
@@ -32,7 +33,7 @@ export type ProfileType = {
     photos: PhotosType
 }
 
-type ActionTypes = InferActionTypes<typeof profileActions>
+export type ActionTypes = InferActionTypes<typeof profileActions>
 type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionTypes>
 
 
@@ -53,7 +54,7 @@ export const profileActions = {
         type: 'social-network/profile/SET-USER-PROFILE',
         profile: profile,
     }as const),
-    setStatus: (status: string | null) => ({
+    setStatus: (status: string) => ({
         type: 'social-network/profile/SET-STATUS',
         status: status,
     }as const),
@@ -73,7 +74,7 @@ export const getProfileThunkCreator = (userId: number | null): ThunkType => {
         dispatch(profileActions.setUserProfile(profileData));
     }
 }
-export const getStatus = (userId: number): ThunkType => {
+export const getStatus = (userId: number | null): ThunkType => {
     return async (dispatch) => {
         let response = await profileAPI.getStatus(userId);
         dispatch(profileActions.setStatus(response.data));
@@ -87,7 +88,7 @@ export const updateStatus = (status: string): ThunkType => {
         }
     }
 }
-export const savePhotoSuccess = (file: string | Blob): ThunkType => {
+export const savePhotoSuccess = (file: File): ThunkType => {
     return async (dispatch) => {
         let savePhotoData = await profileAPI.savePhoto(file);
         if (savePhotoData.resultCode === ResultCodeEnum.Success) {
@@ -95,7 +96,15 @@ export const savePhotoSuccess = (file: string | Blob): ThunkType => {
         }
     }
 }
-export const setMyPersonalInfo = (data: any): ThunkType => {
+export type FormDataType = {
+    aboutMe: string
+    userId: number
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    fullName: string
+    contacts: ContactsType
+}
+export const setMyPersonalInfo = (data: FormDataType): ThunkType => {
     const userId = store.getState().auth.userId;
     return async (dispatch) => {
         let response = await profileAPI.setInfo(data);
@@ -108,7 +117,7 @@ export const setMyPersonalInfo = (data: any): ThunkType => {
 type InitialStateType = {
     posts: Array<PostType>
     profile: ProfileType | null
-    status: string | null
+    status: string
 }
 let initialState = {
     posts: [
@@ -134,7 +143,7 @@ let initialState = {
         },
     ],
     profile: null,
-    status: null,
+    status: "",
 }
 
 const profileReducer = (state: InitialStateType = initialState, action: ActionTypes): InitialStateType => {

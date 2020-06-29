@@ -1,9 +1,9 @@
 import React from 'react';
 import classes from './Dialogs.module.css';
 import DialogsItem from './DialogsItem/DialogsItem';
-import MessageItem, {NewMessageType} from './MessagesItem/MessageItem'
+import MessageItem from './MessagesItem/MessageItem'
 import {connect} from 'react-redux';
-import {withAuthRedirect} from '../../hoc/withAuthRedirect.js';
+import {withAuthRedirect} from '../../hoc/withAuthRedirect';
 import {compose} from 'redux';
 import {
     DialogType,
@@ -12,8 +12,9 @@ import {
     sendMessage, setMessagesView,
     startDialog
 } from "../../redux/dialogs_reducer";
-import {withRouter} from "react-router-dom";
+import {RouteComponentProps, withRouter} from "react-router-dom";
 import {AppStateType} from "../../redux/redux_store";
+import {PathParamsType} from "../Profile/ProfileContainer";
 
 
 type MapStatePropsType = {
@@ -25,20 +26,17 @@ type MapDispatchPropsType = {
     getDialogs: () => void
     startDialog: (userId: number) => void
     getMessages: (userId: number) => void
-    sendMessage: (message: NewMessageType) => void
+    sendMessage: (message: { userId: number, body: string }) => void
     setMessagesView: (messageId: number) => void
 }
-type PropsType = MapStatePropsType & MapDispatchPropsType
+type PropsType = MapStatePropsType & MapDispatchPropsType & RouteComponentProps<PathParamsType>
 
 class Dialogs extends React.Component<PropsType> {
-
     componentDidMount() {
-        // @ts-ignore
         let friendId = this.props.match.params.userId;
         this.props.startDialog(+friendId);
         this.props.getDialogs();
     }
-
 
     render() {
         return (
@@ -46,8 +44,7 @@ class Dialogs extends React.Component<PropsType> {
                 <DialogsItem dialogs={this.props.dialogs} getMessages={this.props.getMessages}
                              theme={this.props.theme}/>
                 <MessageItem messages={this.props.messages} getMessages={this.props.getMessages}
-                    // @ts-ignore
-                             sendMessage={this.props.sendMessage} currentId={this.props.match.params.userId}
+                             sendMessage={this.props.sendMessage} currentId={+this.props.match.params.userId}
                              theme={this.props.theme}/>
             </div>
         )
@@ -57,10 +54,13 @@ class Dialogs extends React.Component<PropsType> {
 let mapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
         dialogs: state.dialogs.dialogs,
-        // @ts-ignore
         messages: state.dialogs.messages,
         theme: state.app.theme,
     }
+}
+type SendNewMessageType = {
+    userId: number,
+    body: string
 }
 let mapDispatchToProps = (dispatch: any) => {
     return {
@@ -73,8 +73,7 @@ let mapDispatchToProps = (dispatch: any) => {
         getMessages: (userId: number) => {
             dispatch(getMessages(userId))
         },
-        // @ts-ignore
-        sendMessage: ({userId, body}) => {
+        sendMessage: ({userId, body}: SendNewMessageType) => {
             dispatch(sendMessage({userId, body}))
         },
         setMessagesView: (messageId: number) => {
@@ -83,9 +82,8 @@ let mapDispatchToProps = (dispatch: any) => {
     }
 }
 
-export default compose(
-    // @ts-ignore
-    connect<MapDispatchPropsType, MapDispatchPropsType, AppStateType>(mapStateToProps, mapDispatchToProps),
+export default compose<React.ComponentType>(
+    connect(mapStateToProps, mapDispatchToProps),
     withRouter,
     withAuthRedirect,
 )(Dialogs);

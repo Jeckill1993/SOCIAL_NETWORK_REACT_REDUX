@@ -1,14 +1,19 @@
 import React from 'react';
 import '../../global_colors.css';
-import {reduxForm, Field} from "redux-form";
+import {reduxForm, Field, InjectedFormProps} from "redux-form";
 import {Input} from "../common/FormsControls/FormsControls";
 import {maxLengthCreator, required} from "../../tools/validators/validators";
 import styles from './Profile.module.css';
+import {ContactsType} from "../../redux/profile_reducer";
 
 let maxLength = maxLengthCreator(30);
 
+type OwnPropsType = {
+    theme: string
+    contacts: ContactsType
+}
 
-const PersonalInfoSettingForm = (props) => {
+const PersonalInfoSettingForm: React.FC<InjectedFormProps<FormDataType, OwnPropsType> & OwnPropsType> = (props) => {
     return (
         <form className={styles.editContactForm} onSubmit={props.handleSubmit}>
             <div>
@@ -29,10 +34,25 @@ const PersonalInfoSettingForm = (props) => {
     )
 }
 
-const Form = reduxForm({form: 'personalInfo'})(PersonalInfoSettingForm);
+const Form = reduxForm<FormDataType, OwnPropsType>({form: 'personalInfo'})(PersonalInfoSettingForm);
 
-const PersonalInfoSetting = ({setMyPersonalInfo, setEditMode, contacts, theme}) => {
-    const setInfo = (formData) => {
+type PropsType = {
+    setMyPersonalInfo: (formData: FormDataType) => void
+    setEditMode: (value: boolean) => void
+    contacts: ContactsType
+    theme: string
+}
+type FormDataType = {
+    aboutMe: string
+    userId: number
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    fullName: string
+    contacts: ContactsType
+}
+
+const PersonalInfoSetting: React.FC<PropsType> = ({setMyPersonalInfo, setEditMode, contacts, theme}) => {
+    const setInfo = (formData: FormDataType) => {
         setMyPersonalInfo(formData);
         setEditMode(false);
     }

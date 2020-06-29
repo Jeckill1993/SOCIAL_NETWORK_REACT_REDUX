@@ -1,4 +1,4 @@
-import {newsAPI} from '../API/api';
+import {newsAPI} from '../API/news-api';
 import {ThunkAction} from "redux-thunk";
 import {AppStateType} from "./redux_store";
 

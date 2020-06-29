@@ -42,7 +42,7 @@ const LoginReduxForm = reduxForm<FormDataType, OwnProps>({form: 'login'})(LoginF
 type PropsType = {
     setMyLoginData: (formData: FormDataType) => void
     isAuth: boolean
-    userId: number
+    userId: number | null
     theme: string
 }
 type FormDataType = {

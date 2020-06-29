@@ -10,7 +10,7 @@ import woodyTheme_dislike from '../../../../assets/images/woodyTheme_dislike.png
 type PropsType = {
     name: string
     message: string
-    photo: string | null
+    photo: string | null | undefined
     id: number
     theme: string
 }

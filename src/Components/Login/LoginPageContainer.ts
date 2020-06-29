@@ -8,24 +8,24 @@ type MapStatePropsType = {
     isAuth: boolean
     theme: string
 }
-type LoginDataType = {
+type LoginFormDataType = {
     email: string
     password: string
     rememberMe: boolean
     captcha: string | null
 }
 type MapDispatchPropsType = {
-    setMyLoginData: (formData: LoginDataType) => void
+    setMyLoginData: (loginData: LoginFormDataType) => void
 }
 
-let mapStateToProps = (state: AppStateType): MapStatePropsType => {
+let mapStateToProps = (state: AppStateType) => {
     return {
         userId: state.auth.userId,
         isAuth: state.auth.isAuth,
         theme: state.app.theme,
     }
 }
-// @ts-ignore
-const LoginPageContainer = connect<MapStatePropsType & MapDispatchPropsType, AppStateType>(mapStateToProps, { setMyLoginData: setMyLoginDataThunkCreator })(LoginPage);
-// @ts-ignore
+
+const LoginPageContainer = connect<MapStatePropsType, MapDispatchPropsType, {}, AppStateType>(mapStateToProps, { setMyLoginData: setMyLoginDataThunkCreator })(LoginPage);
+
 export default LoginPageContainer;
