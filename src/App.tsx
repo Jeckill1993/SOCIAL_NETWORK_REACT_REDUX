@@ -18,7 +18,7 @@ const Dialogs = React.lazy(() => import('./Components/Dialogs/Dialogs'));
 const News = React.lazy(() => import('./Components/News/News'));
 const Music = React.lazy(() => import('./Components/Music/Music'));
 const Setting = React.lazy(() => import ('./Components/Setting/Setting'));
-const UsersContainer = React.lazy(() => import('./Components/Users/UsersContainer'));
+const Users = React.lazy(() => import('./Components/Users/Users'));
 const LoginPageContainer = React.lazy(() => import('./Components/Login/LoginPageContainer'));
 
 
@@ -55,7 +55,7 @@ class App extends Component<PropsFromRedux> {
                                     <Route path="/news" render={() => <News news={this.props.news} theme={this.props.theme}/>}/>
                                     <Route path="/music" render={() => <Music/>}/>
                                     <Route path="/setting" render={() => <Setting/>}/>
-                                    <Route path="/users" render={() => <UsersContainer/>}/>
+                                    <Route path="/users" render={() => <Users />}/>
                                     <Route path="/login" render={() => <LoginPageContainer/>}/>
                                     <Route exact path="/" render={() => <Redirect to="/profile" />}/>
                                     <Route path="*" render={() => <div><h2>404 NOT FOUND</h2></div>}/>
