@@ -23,18 +23,18 @@ const LoginPageContainer = React.lazy(() => import('./Components/Login/LoginPage
 
 
 class App extends Component<PropsFromRedux> {
-    catchAllUnhandledErrors = (e: PromiseRejectionEvent) => {
+    /*catchAllUnhandledErrors = (e: PromiseRejectionEvent) => {
         alert('Some error occurred');
-    }
+    }*/
     componentDidMount() {
         this.props.initialize();
         this.props.getNewMessages();
         this.props.getNews();
-        window.addEventListener('unhandledrejection', this.catchAllUnhandledErrors);
+        /*window.addEventListener('unhandledrejection', this.catchAllUnhandledErrors);*/
     }
-    componentWillUnmount() {
+    /*componentWillUnmount() {
         window.removeEventListener('unhandledrejection', this.catchAllUnhandledErrors);
-    }
+    }*/
 
     render() {
         if (!this.props.initialized) {
